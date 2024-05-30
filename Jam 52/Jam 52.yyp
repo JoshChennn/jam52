@@ -53,6 +53,8 @@
     {"id":{"name":"rm_titleScreen","path":"rooms/rm_titleScreen/rm_titleScreen.yy",},},
     {"id":{"name":"shRed","path":"shaders/shRed/shRed.yy",},},
     {"id":{"name":"shWhite","path":"shaders/shWhite/shWhite.yy",},},
+    {"id":{"name":"spr_bat","path":"sprites/spr_bat/spr_bat.yy",},},
+    {"id":{"name":"spr_deadBat","path":"sprites/spr_deadBat/spr_deadBat.yy",},},
     {"id":{"name":"spr_deadGhost","path":"sprites/spr_deadGhost/spr_deadGhost.yy",},},
     {"id":{"name":"spr_deadSkeleton","path":"sprites/spr_deadSkeleton/spr_deadSkeleton.yy",},},
     {"id":{"name":"spr_flames","path":"sprites/spr_flames/spr_flames.yy",},},
