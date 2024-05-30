@@ -35,6 +35,7 @@
   "name":"Jam 52",
   "resources":[
     {"id":{"name":"obj_allEnemies","path":"objects/obj_allEnemies/obj_allEnemies.yy",},},
+    {"id":{"name":"obj_camera","path":"objects/obj_camera/obj_camera.yy",},},
     {"id":{"name":"obj_enemyBat","path":"objects/obj_enemyBat/obj_enemyBat.yy",},},
     {"id":{"name":"obj_enemyGhost","path":"objects/obj_enemyGhost/obj_enemyGhost.yy",},},
     {"id":{"name":"obj_enemySkeleton","path":"objects/obj_enemySkeleton/obj_enemySkeleton.yy",},},
