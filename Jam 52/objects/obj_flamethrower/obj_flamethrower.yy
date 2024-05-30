@@ -31,8 +31,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"spr_dummy_flamethrower",
-    "path":"sprites/spr_dummy_flamethrower/spr_dummy_flamethrower.yy",
+    "name":"spr_flamethrower",
+    "path":"sprites/spr_flamethrower/spr_flamethrower.yy",
   },
   "spriteMaskId":null,
   "visible":true,

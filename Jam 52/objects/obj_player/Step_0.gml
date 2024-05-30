@@ -5,6 +5,12 @@ key_left = keyboard_check(vk_left) || keyboard_check(ord("A"));
 key_right = keyboard_check(vk_right) || keyboard_check(ord("D"));
 key_jump = keyboard_check_pressed(vk_space) || keyboard_check(ord("W"));
 
+if (keyboard_check(ord("R"))) game_restart();
+
+if (flash > 0) flash--;
+
+if (hp <= 0) room_goto(0);
+
 // Calculate movement
 var move = key_right - key_left;
 horspeed = move * walkspeed;
