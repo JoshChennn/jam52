@@ -1,51 +1,101 @@
 /// @description Basic Mechanics
 
-if (flash > 0) flash--;
-var move = 1;
-
-// Introduce randomness to horizontal movement
-if (irandom(100) < 90) {  // 5% chance to change direction
-    move = irandom_range(-1, 1);  // Randomly choose -1, 0, or 1
-}
-
 if (hp <= 0) {
     sprite_index = spr_deadSkeleton;
-	image_alpha = half_opacity;
-	return;
+    image_alpha = half_opacity;
+    if (my_spear != noone) {
+		if (spear_in_hand) {
+	        instance_destroy(my_spear);
+		}
+    }
+    while (!place_meeting(x, y + 1, obj_wall)) {
+        y = y + 1;
+    }
+    return;
 } else {
-    sprite_index = spr_skeleton; // Use the appropriate sprite index for alive state
+    sprite_index = spr_skeleton;
 }
 
+if (flash > 0) flash--;
 
-var random_jump_chance = irandom(100);
+// Manage spear creation and throwing
+if (!spear_in_hand) {
+	if (spear_throw_cooldown <= 0) {
+	    my_spear = instance_create_layer(x, y, "Spears", obj_skeletonSpear);
+	    spear_in_hand = true;
+	}
+}
+if (spear_in_hand) {
+	my_spear.x = x;
+	my_spear.y = y;
+	my_spear.image_angle = point_direction(x, y, obj_player.x, obj_player.y);
+	
+	if (spear_throw_cooldown <= -120) {
+		if (!collision_line(x, y, target.x, target.y, obj_wall, true, true)) {
+	        spear_throw_cooldown = spear_throw_interval;
 
-// Calculate movement
-horspeed = move * walkspeed;
-verspeed = verspeed + grvty;
+	        // Calculate direction to player
+	        var dx_to_player = target.x - x;
+	        var dy_to_player = target.y - y;
+	        var distance_to_player = point_distance(x, y, target.x, target.y);
 
-// Jumping 
-if (place_meeting(x, y+1, obj_wall)) {
-    if (random_jump_chance < 10) {  // 10% chance to jump
-        verspeed -= 7;
+	        // THIS NEEDS TO BE FIXED TO MAKE THE SPEAR ARC BETTER
+	        if (distance_to_player > 0) {
+	            var spear_speed = 5;
+	            var arc_height = -5;  
+	            var spear_dir_x = (dx_to_player / distance_to_player) * spear_speed;
+	            var spear_dir_y = (dy_to_player / distance_to_player) * (spear_speed / 2) + arc_height;
+	            my_spear.hspeed = spear_dir_x;
+	            my_spear.vspeed = spear_dir_y;
+
+	            // Detach spear from skeleton
+	            my_spear = noone;
+	            spear_in_hand = false;
+	        }
+		}
+	}
+}
+
+spear_throw_cooldown--;
+// Calculate direction towards player
+var dx_to_player = target.x - x;
+var dy_to_player = target.y - y;
+
+// Set horizontal speed to move towards the player
+if (dx_to_player > 0) {
+    horspeed = walkspeed;
+} else if (dx_to_player < 0) {
+    horspeed = -walkspeed;
+} else {
+    horspeed = 0;
+}
+
+// Apply gravity
+verspeed += grvty;
+
+// Jumping if near player and on the ground
+if (place_meeting(x, y + 1, obj_wall)) {
+    if (abs(dy_to_player) > 48) {  
+        verspeed = -jump_strength;
     }
 }
 
 // Horizontal Collisions
-if(place_meeting(x+horspeed, y, obj_wall)) {
-    while(!place_meeting(x+sign(horspeed), y, obj_wall)) {
-        x = x + sign(horspeed);
+if (place_meeting(x + horspeed, y, obj_wall)) {
+    while (!place_meeting(x + sign(horspeed), y, obj_wall)) {
+        x += sign(horspeed);
     }
     horspeed = 0;
 }
 
-x = x + horspeed;
+x += horspeed;
 
 // Vertical Collisions
-if(place_meeting(x, y+verspeed, obj_wall)) {
-    while(!place_meeting(x, y+sign(verspeed), obj_wall)) {
-        y = y + sign(verspeed);
+if (place_meeting(x, y + verspeed, obj_wall)) {
+    while (!place_meeting(x, y + sign(verspeed), obj_wall)) {
+        y += sign(verspeed);
     }
     verspeed = 0;
 }
 
-y = y + verspeed;
+y += verspeed;
