@@ -48,6 +48,7 @@
     {"id":{"name":"obj_wall","path":"objects/obj_wall/obj_wall.yy",},},
     {"id":{"name":"rm_level1","path":"rooms/rm_level1/rm_level1.yy",},},
     {"id":{"name":"rm_titleScreen","path":"rooms/rm_titleScreen/rm_titleScreen.yy",},},
+    {"id":{"name":"spr_player","path":"sprites/spr_player/spr_player.yy",},},
   ],
   "resourceType":"GMProject",
   "resourceVersion":"2.0",
