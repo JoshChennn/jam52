@@ -1,7 +1,7 @@
 /// @description Variables 
 
 target = obj_player;
-walkspeed = 1.5; 
+walkspeed = 2; 
 hp = 50;
 jump_strength = 10;
 grvty = 0.5;
@@ -15,3 +15,5 @@ spear_throw_cooldown = 0;
 spear_throw_interval = 120; 
 spear_in_hand = false;
 my_spear = noone;
+jump_cooldown = 20;
+far_away_randomness = 10;
