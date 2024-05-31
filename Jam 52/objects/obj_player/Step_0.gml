@@ -3,7 +3,7 @@
 // Get player input
 key_left = keyboard_check(vk_left) || keyboard_check(ord("A"));
 key_right = keyboard_check(vk_right) || keyboard_check(ord("D"));
-key_jump = keyboard_check_pressed(vk_space) || keyboard_check(ord("W"));
+key_jump = keyboard_check_pressed(vk_space) || keyboard_check_pressed(ord("W"));
 
 if (keyboard_check(ord("R"))) game_restart();
 
@@ -59,3 +59,17 @@ if (place_meeting(x, y + verspeed, obj_wall)) {
 }
 
 y = y + verspeed;
+
+// Setting animation and sprite direction
+if (horspeed > 0) {
+	image_xscale = 1;	
+}
+else {
+	image_xscale = -1;
+}
+if (move != 0) {
+	sprite_index = spr_playerWalking;
+}
+else {
+	sprite_index = spr_player;
+}

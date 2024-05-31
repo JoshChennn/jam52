@@ -2,10 +2,10 @@
 
 has_wall_jumped_left = false;
 has_wall_jumped_right = false;
-jump_height = -7; 
-grvty = 0.2;
+jump_height = -9; 
+grvty = 0.5;
 horspeed = 0;
 verspeed = 0;
-walkspeed = 6;
+walkspeed = 4;
 hp = 30;
 flash = 0; 

@@ -160,3 +160,21 @@ if (place_meeting(x, y, obj_wall)) {
     image_alpha = normal_opacity; // Set opacity to normal
     move_speed = 2;
 }
+
+// Setting sprite direction
+if (variable_instance_exists(self, "dir_x")) {
+	if (x < obj_player) {	
+		image_xscale = 1;
+	}
+	else {
+		image_xscale = -1;	
+	}
+}
+else {
+	if (random_dir_x > 0) {	
+		image_xscale = 1;
+	}
+	else {
+		image_xscale = -1;	
+	}
+}

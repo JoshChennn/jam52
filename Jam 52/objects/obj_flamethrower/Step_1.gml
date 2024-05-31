@@ -1,10 +1,17 @@
 /// @description Mechanics
 
-// Position'
+// Position
 x = obj_player.x;
 y = obj_player.y;
 
 image_angle = point_direction(x, y, mouse_x, mouse_y);
+
+// New flamethrower test
+if (mouse_check_button(mb_left)) {
+	instance_create_depth(x,y,depth+1,obj_flame);
+}
+
+/* FOR TESTING
 
 firingdelay = firingdelay - 1;
 recoil = max(0, recoil - 1);
@@ -29,6 +36,7 @@ if (mouse_check_button(mb_left) && firingdelay < 0) {
         bullet.gravity_direction = 270;
     }
 }
+*/
 
 // Adjust position for recoil
 x = x - lengthdir_x(recoil, image_angle);
