@@ -25,32 +25,27 @@ if (!spear_in_hand) {
         spear_in_hand = true;
     }
 }
+
 if (spear_in_hand) {
+    my_spear.image_angle = point_direction(x, y, obj_player.x, obj_player.y);
     my_spear.x = x;
     my_spear.y = y;
-    my_spear.image_angle = point_direction(x, y, obj_player.x, obj_player.y);
 
     if (spear_throw_cooldown <= -120) {
         if (!collision_line(x, y, target.x, target.y, obj_wall, true, true)) {
             spear_throw_cooldown = spear_throw_interval;
 
-            // Calculate direction to player
             var dx_to_player = target.x - x;
             var dy_to_player = target.y - y;
             var distance_to_player = point_distance(x, y, target.x, target.y);
 
             if (distance_to_player > 0) {
-                var spear_speed = 5;
-                var arc_height = -5;  
-                var spear_dir_x = (dx_to_player / distance_to_player) * spear_speed;
-                var spear_dir_y = (dy_to_player / distance_to_player) * (spear_speed / 2);
-
-                // Create the arc effect by modifying the initial vertical speed
-                spear_dir_y += arc_height;
-
-                // Set the spear's speed
-                my_spear.hspeed = spear_dir_x;
-                my_spear.vspeed = spear_dir_y;
+                my_spear.speed = 10;
+                my_spear.gravity = 0.3;
+                my_spear.resistance = 0.1;
+                my_spear.direction = point_direction(x, y, target.x, target.y);
+                my_spear.hspeed = lengthdir_x(my_spear.speed, my_spear.direction);
+                my_spear.vspeed = lengthdir_y(my_spear.speed, my_spear.direction);
 
                 // Detach spear from skeleton
                 my_spear = noone;
@@ -62,28 +57,82 @@ if (spear_in_hand) {
 
 spear_throw_cooldown--;
 
-// Calculate direction towards player
-var dx_to_player = target.x - x;
-var dy_to_player = target.y - y;
+// Variables for movement decision
+if (!variable_instance_exists(self, "decision_timer")) {
+    decision_timer = 0;
+}
+if (!variable_instance_exists(self, "random_movement")) {
+    random_movement = false;
+}
 
-// Set horizontal speed to move towards the player
-if (dx_to_player > 0) {
-    horspeed = walkspeed;
-} else if (dx_to_player < 0) {
-    horspeed = -walkspeed;
+// Decide direction and whether to jump every 0.5 seconds
+if (decision_timer <= 0) {
+    decision_timer = 30;
+
+    if (irandom(3) == 0) {
+        random_movement = true;
+        horspeed = irandom_range(-walkspeed, walkspeed);
+        if (irandom(1) == 0) {
+            verspeed = -jump_strength;
+        } else {
+            verspeed = 0;
+        }
+    } else {
+        random_movement = false;
+
+        // Calculate direction towards player
+        var dx_to_player = target.x - x;
+        var dy_to_player = target.y - y;
+
+        // Set horizontal speed to move towards the player
+        if (dx_to_player > 0) {
+            horspeed = walkspeed;
+        } else if (dx_to_player < 0) {
+            horspeed = -walkspeed;
+        } else {
+            horspeed = 0;
+        }
+
+        // Jumping if near player and on the ground
+        if (place_meeting(x, y + 1, obj_wall) && abs(dy_to_player) > 48) {
+            verspeed = -jump_strength;
+        } else {
+            verspeed = 0;
+        }
+    }
+
+    // Avoid other skeletons within a distance of 30
+    var nearest_skeleton = instance_nearest(x, y, obj_enemySkeleton);
+    if (nearest_skeleton != noone && nearest_skeleton != self) {
+        var distance_to_skeleton = point_distance(x, y, nearest_skeleton.x, nearest_skeleton.y);
+        if (distance_to_skeleton < 30) {
+
+            if (irandom(4) < 1) {
+                var dir_away_x = x - nearest_skeleton.x;
+                var dir_away_y = y - nearest_skeleton.y;
+
+                // Normalize the direction away from the other skeleton
+                var distance_away = point_distance(0, 0, dir_away_x, dir_away_y);
+                if (distance_away != 0) {
+                    dir_away_x /= distance_away;
+                    dir_away_y /= distance_away;
+                }
+
+                // Adjust horizontal and vertical speed to move away from the other skeleton
+                horspeed = dir_away_x * walkspeed;
+                verspeed = dir_away_y * jump_strength;
+                verspeed = dir_away_y * jump_strength;
+
+                random_movement = true;
+            }
+        }
+    }
 } else {
-    horspeed = 0;
+    decision_timer--;
 }
 
 // Apply gravity
 verspeed += grvty;
-
-// Jumping if near player and on the ground
-if (place_meeting(x, y + 1, obj_wall)) {
-    if (abs(dy_to_player) > 48) {  
-        verspeed = -jump_strength;
-    }
-}
 
 // Horizontal Collisions
 if (place_meeting(x + horspeed, y, obj_wall)) {

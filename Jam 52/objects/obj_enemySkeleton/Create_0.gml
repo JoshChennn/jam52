@@ -1,9 +1,9 @@
 /// @description Variables 
 
 target = obj_player;
-walkspeed = 2; 
+walkspeed = 1.5; 
 hp = 50;
-jump_strength = 12;
+jump_strength = 10;
 grvty = 0.5;
 max_overlap = 5;
 normal_opacity = 1;

@@ -7,66 +7,202 @@ if (hp <= 0) {
     }
     return;
 } else {
-    sprite_index = spr_bat; // Use the appropriate sprite index for alive state
+    sprite_index = spr_bat; 
 }
 
-// Variable declarations
-if (!variable_global_exists("dir_x")) {
-    global.dir_x = 1;
-    global.dir_y = 1;
+// Variables for random movement and detection range modification
+if (!variable_instance_exists(self, "random_move_timer")) {
+    random_move_timer = 0;
 }
-if (!variable_global_exists("change_time")) {
-    global.change_time = 30;
+if (!variable_instance_exists(self, "random_dir_x")) {
+    random_dir_x = random_range(-1, 1);
+}
+if (!variable_instance_exists(self, "random_dir_y")) {
+    random_dir_y = random_range(-1, 1);
+}
+if (!variable_instance_exists(self, "random_move_chance_timer")) {
+    random_move_chance_timer = 120; 
+}
+if (!variable_instance_exists(self, "base_detection_range")) {
+    base_detection_range = 200;
+}
+if (!variable_instance_exists(self, "detection_range")) {
+    detection_range = base_detection_range;
+}
+if (!variable_instance_exists(self, "detection_range_timer")) {
+    detection_range_timer = 0;
 }
 
-// Directions to player with added randomness at every step
-global.change_time--;
-if (global.change_time <= 0) {
-    global.change_time = 60;
-    global.dir_x = target.x - x;
-    global.dir_y = target.y - y;
+// Room boundaries
+var room_left = 0;
+var room_right = room_width;
+var room_top = 0;
+var room_bottom = room_height;
 
-    // Normalize the direction
-    var distance = point_distance(x, y, x + global.dir_x, y + global.dir_y);
-    if (distance != 0) {
-        global.dir_x /= distance;
-        global.dir_y /= distance;
-    }
-}
-
-// Apply randomness to the direction at every step
-global.dir_x += random_range(-0.25, 0.25);
-global.dir_y += random_range(-0.25, 0.25);
-
-// Normalize the direction again
-var distance = point_distance(0, 0, global.dir_x, global.dir_y);
-if (distance != 0) {
-    global.dir_x /= distance;
-    global.dir_y /= distance;
-}
+// Get the distance to the player
+var distance_to_player = point_distance(x, y, target.x, target.y);
 
 if (flash > 0) flash--;
 
-// Move towards the player with collision checks
-var new_x = x + global.dir_x * move_speed;
-var new_y = y + global.dir_y * move_speed;
-
-// Horizontal Collisions
-if (place_meeting(new_x, y, obj_wall)) {
-    while (place_meeting(new_x, y, obj_wall)) {
-        new_x -= sign(global.dir_x);
+// Random movement logic
+var random_movement = false;
+if (random_move_timer > 0) {
+    random_movement = true;
+    random_move_timer--;
+} else if (random_move_chance_timer <= 0) {
+    // 1 in X chance for random movement even if within detection range
+    if (irandom(chance_of_long_detection) == 0) {
+        random_movement = true;
+        random_move_timer = 120; 
     }
-    global.dir_x = -global.dir_x; // Reverse direction on collision
+    if (irandom(4) == 0) {
+        detection_range = base_detection_range * increase_multiple;
+        detection_range_timer = increase_time; 
+    }
+    random_move_chance_timer = 120; 
 } else {
-    x = new_x;
+    random_move_chance_timer--;
 }
 
-// Vertical Collisions
-if (place_meeting(x, new_y, obj_wall)) {
-    while (place_meeting(x, new_y, obj_wall)) {
-        new_y -= sign(global.dir_y);
-    }
-    global.dir_y = -global.dir_y; // Reverse direction on collision
+// Reset detection range if timer expires
+if (detection_range_timer > 0) {
+    detection_range_timer--;
 } else {
-    y = new_y;
+    detection_range = base_detection_range;
+}
+
+if (random_movement) {
+    // Normalize the random direction
+    var random_distance = point_distance(0, 0, random_dir_x, random_dir_y);
+    if (random_distance != 0) {
+        random_dir_x /= random_distance;
+        random_dir_y /= random_distance;
+    }
+
+    // Move in the random direction with collision checks
+    var new_x = x + random_dir_x * move_speed;
+    var new_y = y + random_dir_y * move_speed;
+
+    // Horizontal Collisions
+    if (place_meeting(new_x, y, obj_wall)) {
+        while (place_meeting(new_x, y, obj_wall)) {
+            new_x -= sign(random_dir_x);
+        }
+        random_dir_x = -random_dir_x; // Reverse direction on collision
+    } else {
+        x = new_x;
+    }
+
+    // Vertical Collisions
+    if (place_meeting(x, new_y, obj_wall)) {
+        while (place_meeting(x, new_y, obj_wall)) {
+            new_y -= sign(random_dir_y);
+        }
+        random_dir_y = -random_dir_y; // Reverse direction on collision
+    } else {
+        y = new_y;
+    }
+} else if (distance_to_player <= detection_range) {
+    // Get the direction towards the player with some randomness
+    var dir_x = (target.x - x);
+    var dir_y = (target.y - y);
+
+    // Normalize the direction
+    var distance = point_distance(x, y, target.x, target.y);
+    if (distance != 0) {
+        dir_x /= distance;
+        dir_y /= distance;
+    }
+
+    // Apply randomness to the direction at every step
+    dir_x += random_range(-0.25, 0.25);
+    dir_y += random_range(-0.25, 0.25);
+
+    // Normalize the direction again
+    var random_distance = point_distance(0, 0, dir_x, dir_y);
+    if (random_distance != 0) {
+        dir_x /= random_distance;
+        dir_y /= random_distance;
+    }
+
+    // Move towards the player with collision checks
+    var new_x = x + dir_x * move_speed;
+    var new_y = y + dir_y * move_speed;
+
+    // Horizontal Collisions
+    if (place_meeting(new_x, y, obj_wall)) {
+        while (place_meeting(new_x, y, obj_wall)) {
+            new_x -= sign(dir_x);
+        }
+        dir_x = -dir_x; // Reverse direction on collision
+    } else {
+        x = new_x;
+    }
+
+    // Vertical Collisions
+    if (place_meeting(x, new_y, obj_wall)) {
+        while (place_meeting(x, new_y, obj_wall)) {
+            new_y -= sign(dir_y);
+        }
+        dir_y = -dir_y; // Reverse direction on collision
+    } else {
+        y = new_y;
+    }
+} else {
+    // Normal random movement when not aware of the player
+    if (random_move_timer <= 0) {
+        // Pick a new random direction
+        random_dir_x = random_range(-1, 1);
+        random_dir_y = random_range(-1, 1);
+
+        random_move_timer = 120;
+    }
+
+    // Normalize the random direction
+    var random_distance = point_distance(0, 0, random_dir_x, random_dir_y);
+    if (random_distance != 0) {
+        random_dir_x /= random_distance;
+        random_dir_y /= random_distance;
+    }
+
+    // Move in the random direction with collision checks
+    var new_x = x + random_dir_x * move_speed;
+    var new_y = y + random_dir_y * move_speed;
+
+    // Horizontal Collisions
+    if (place_meeting(new_x, y, obj_wall)) {
+        while (place_meeting(new_x, y, obj_wall)) {
+            new_x -= sign(random_dir_x);
+        }
+        random_dir_x = -random_dir_x; // Reverse direction on collision
+    } else {
+        x = new_x;
+    }
+
+    // Vertical Collisions
+    if (place_meeting(x, new_y, obj_wall)) {
+        while (place_meeting(x, new_y, obj_wall)) {
+            new_y -= sign(random_dir_y);
+        }
+        random_dir_y = -random_dir_y; // Reverse direction on collision
+    } else {
+        y = new_y;
+    }
+
+    // Decrease the timer
+    random_move_timer--;
+}
+
+// Prevent the bat from moving out of the room
+if (x < room_left) {
+    x = room_left;
+}
+if (x > room_right) {
+    x = room_right;
+}
+if (y < room_top) {
+    y = room_top;
+}
+if (y > room_bottom) {
+    y = room_bottom;
 }
