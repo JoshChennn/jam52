@@ -9,3 +9,5 @@ verspeed = 0;
 walkspeed = 4;
 hp = 30;
 flash = 0; 
+
+instance_create_depth(x,y,depth+1,obj_torch);

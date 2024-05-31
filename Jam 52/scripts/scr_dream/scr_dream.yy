@@ -1,0 +1,13 @@
+{
+  "$GMScript":"",
+  "%Name":"scr_dream",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_dream",
+  "parent":{
+    "name":"Scripts",
+    "path":"folders/Scripts.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

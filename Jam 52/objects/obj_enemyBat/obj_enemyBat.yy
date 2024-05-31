@@ -15,8 +15,8 @@
     "path":"folders/Objects.yy",
   },
   "parentObjectId":{
-    "name":"obj_allEnemies",
-    "path":"objects/obj_allEnemies/obj_allEnemies.yy",
+    "name":"obj_allObjects",
+    "path":"objects/obj_allObjects/obj_allObjects.yy",
   },
   "persistent":false,
   "physicsAngularDamping":0.1,
@@ -36,8 +36,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"spr_bat",
-    "path":"sprites/spr_bat/spr_bat.yy",
+    "name":"spr_butterfly",
+    "path":"sprites/spr_butterfly/spr_butterfly.yy",
   },
   "spriteMaskId":null,
   "visible":true,
