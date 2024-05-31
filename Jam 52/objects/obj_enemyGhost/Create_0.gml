@@ -9,6 +9,6 @@ half_opacity = 0.5;
 flash = 0; 
 detection_range = 500;
 increase_in_detection_range = 10;
-frequency_of_increase = 6; // 1/frequency_of_increase
+frequency_of_increase = 3; // 1/frequency_of_increase
 base_detection_range = 500;
 increase_time = 4;

@@ -1,8 +1,8 @@
-// Start small
-hit_wall = false;
+/// @description Insert description here
 
-image_xscale = 0.1;
+image_xscale = random_range(0.1, 0.4);
 image_yscale = image_xscale;
+image_alpha = random_range(0.2, 0.5);
 
 gun_range = 35;
 
@@ -19,8 +19,8 @@ else {
 }
 
 var dir = irandom_range(-5,5);
-direction = obj_flamethrower.image_angle + dir;
-speed = random_range(7,11);
+direction = 90 + dir;
+speed = random_range(1,4);
 
-var destroy = random_range(10,gun_range);
+var destroy = random_range(10, 70);
 alarm_set(0, destroy);

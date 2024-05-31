@@ -10,3 +10,4 @@ change_time = 0;
 chance_of_long_detection = 3;
 increase_multiple = 3;
 increase_time = 2;
+reconsider = 60;
