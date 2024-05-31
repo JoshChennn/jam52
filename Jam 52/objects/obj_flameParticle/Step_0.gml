@@ -1,4 +1,13 @@
 /// @description Behavior
+if (lifespan == 0) {
+    image_index = 0;
+} else if (lifespan % 2 == 1) {
+    image_index = 1;
+} else {
+    image_index = 2;
+}
+
+lifespan += 1;
 
 // Check for collision with walls
 var collided = false;
@@ -19,7 +28,7 @@ if (collided) {
 }
 
 // Random chance to destroy instance if ever_collided is true
-if (ever_collided && irandom_range(0, 20) == 10) {
+if (ever_collided && irandom_range(0, 5) == 3) {
     instance_destroy();
 } else {
     // Apply gravity

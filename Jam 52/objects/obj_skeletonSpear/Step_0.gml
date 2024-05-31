@@ -18,7 +18,3 @@ if (place_meeting(x, y, obj_player)) {
 if (place_meeting(x, y, obj_wall)) && (!place_meeting(x, y, obj_enemySkeleton)) {
     instance_destroy(); // Destroy the spear upon collision with a wall
 }
-
-if (!place_meeting(x, y, obj_enemySkeleton)) {
-	y += 12;
-}

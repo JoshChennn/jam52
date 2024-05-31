@@ -14,8 +14,8 @@ if (mouse_check_button(mb_left) && firingdelay < 0) {
     firingdelay = 5;
     
     // Shoot 10 bullets
-    var bullet_count = 10;
-    var angle_step = 4; // Spread angle (change this value to control the spread)
+    var bullet_count = 20;
+    var angle_step = 1; // Spread angle (change this value to control the spread)
     var start_angle = -angle_step * (bullet_count - 1) / 2;
     
     for (var i = 0; i < bullet_count; i++) {

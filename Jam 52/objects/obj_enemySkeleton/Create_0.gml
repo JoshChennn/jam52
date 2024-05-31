@@ -2,7 +2,7 @@
 
 target = obj_player;
 walkspeed = 2; 
-hp = 20;
+hp = 50;
 jump_strength = 12;
 grvty = 0.5;
 max_overlap = 5;
