@@ -13,7 +13,7 @@ if (hp <= 0) {
     }
     return;
 } else {
-    sprite_index = spr_skeleton;
+    sprite_index = spr_skeletonBoss;
 }
 
 if (flash > 0) flash--;
@@ -21,7 +21,7 @@ if (flash > 0) flash--;
 // Manage spear creation and throwing
 if (!spear_in_hand) {
     if (spear_throw_cooldown <= 0) {
-        my_spear = instance_create_depth(x, y, depth-1, obj_skeletonSpear);
+        my_spear = instance_create_depth(x, y, depth-1, obj_skeletonBossSpear);
         spear_in_hand = true;
     }
 }
