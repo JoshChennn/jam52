@@ -7,3 +7,4 @@ hspeed = 0;
 vspeed = 0;
 gravity = 0;
 resistance = 0;
+cooldown = 0;

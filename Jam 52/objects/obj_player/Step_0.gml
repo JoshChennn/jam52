@@ -1,4 +1,6 @@
 /// @description Basic Mechanics
+if(keyboard_check(ord("R"))) { game_restart(); }
+
 if !in_bubble {
 	// Get player input
 	var key_left = keyboard_check(vk_left) || keyboard_check(ord("A"));
