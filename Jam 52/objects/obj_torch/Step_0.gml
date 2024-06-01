@@ -19,7 +19,6 @@ else if (size > 1.03) {
 grow = (0.04 - abs(1 - size)) / 50;	
 size += grow * bigger;
 
-
 if dreamMode scr_dream(size);
 else {
 	if instance_exists(obj_bubble) instance_destroy(obj_bubble);

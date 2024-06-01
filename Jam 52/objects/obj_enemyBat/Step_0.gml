@@ -7,7 +7,7 @@ if (hp <= 0) {
     }
     return;
 } else {
-    sprite_index = spr_bat; 
+    sprite_index = spr_butterfly; 
 }
 
 // Variables for random movement and detection range modification

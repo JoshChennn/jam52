@@ -1,11 +1,11 @@
 /// @description Basic Mechanics
-if(keyboard_check(ord("R"))) { game_restart(); }
+if keyboard_check(ord("R")) room_restart();
 
 if !in_bubble {
 	// Get player input
 	var key_left = keyboard_check(vk_left) || keyboard_check(ord("A"));
 	var key_right = keyboard_check(vk_right) || keyboard_check(ord("D"));
-	var key_jump = keyboard_check_pressed(vk_space) || keyboard_check_pressed(ord("W"));
+	var key_jump = keyboard_check_pressed(vk_up) || keyboard_check_pressed(ord("W"));
 
 	// Calculate movement
 	var move = key_right - key_left;
