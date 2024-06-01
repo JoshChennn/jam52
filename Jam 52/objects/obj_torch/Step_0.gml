@@ -21,7 +21,3 @@ size += grow * bigger;
 
 
 if dreamMode scr_dream(size);
-else {
-	if instance_exists(obj_bubble) instance_destroy(obj_bubble);
-	obj_player.in_bubble = false;
-}

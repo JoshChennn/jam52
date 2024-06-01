@@ -1,1 +1,0 @@
-if !obj_player.in_bubble draw_self();

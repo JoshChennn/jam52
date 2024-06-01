@@ -20,7 +20,7 @@ else {
 
 var dir = irandom_range(-5,5);
 direction = obj_flamethrower.image_angle + dir;
-speed = random_range(7,11);
+speed = random_range(10,14);
 
 var destroy = random_range(10,gun_range);
 alarm_set(0, destroy);

@@ -9,7 +9,6 @@ verspeed = 0;
 walkspeed = 5;
 hp = 30;
 flash = 0;
-in_bubble = false;
 
 instance_create_depth(x,y,depth+1,obj_torch);
 instance_create_depth(x,y,depth-1,obj_flamethrower);
