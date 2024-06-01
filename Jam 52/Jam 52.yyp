@@ -38,6 +38,7 @@
     {"id":{"name":"obj_allEnemies","path":"objects/obj_allEnemies/obj_allEnemies.yy",},},
     {"id":{"name":"obj_allObjects","path":"objects/obj_allObjects/obj_allObjects.yy",},},
     {"id":{"name":"obj_bubble","path":"objects/obj_bubble/obj_bubble.yy",},},
+    {"id":{"name":"obj_bubbleParticle","path":"objects/obj_bubbleParticle/obj_bubbleParticle.yy",},},
     {"id":{"name":"obj_camera","path":"objects/obj_camera/obj_camera.yy",},},
     {"id":{"name":"obj_cursor","path":"objects/obj_cursor/obj_cursor.yy",},},
     {"id":{"name":"obj_enemyBat","path":"objects/obj_enemyBat/obj_enemyBat.yy",},},
