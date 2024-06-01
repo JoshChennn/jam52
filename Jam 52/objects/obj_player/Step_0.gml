@@ -58,7 +58,7 @@ if !in_bubble {
 
 	// Setting animation and sprite direction
 
-	if (move != 0) {
+	if (move != 0 and place_meeting(x,y+3,obj_wall)) {
 		sprite_index = spr_playerWalking;
 	}
 	else {

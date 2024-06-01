@@ -12,4 +12,4 @@ flash = 0;
 in_bubble = false;
 
 instance_create_depth(x,y,depth+1,obj_torch);
-instance_create_layer(x,y,"Gun",obj_flamethrower);
+instance_create_depth(x,y,depth-1,obj_flamethrower);

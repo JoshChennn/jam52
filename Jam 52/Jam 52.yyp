@@ -95,6 +95,7 @@
     {"id":{"name":"spr_torchbarFill","path":"sprites/spr_torchbarFill/spr_torchbarFill.yy",},},
     {"id":{"name":"spr_trees","path":"sprites/spr_trees/spr_trees.yy",},},
     {"id":{"name":"spr_wall","path":"sprites/spr_wall/spr_wall.yy",},},
+    {"id":{"name":"spr_wallDream","path":"sprites/spr_wallDream/spr_wallDream.yy",},},
   ],
   "resourceType":"GMProject",
   "resourceVersion":"2.0",

@@ -6,7 +6,7 @@ if !obj_player.in_bubble {
 
 	image_angle = point_direction(x, y, mouse_x, mouse_y);
 
-	// New flamethrower test
+	// New flamethrower
 	if (obj_torch.dreamMode) {
 		if mouse_check_button(mb_left) {
 			if !instance_exists(obj_bubble) {
@@ -36,6 +36,21 @@ if !obj_player.in_bubble {
 		}
 		if (mouse_check_button(mb_left)) {
 			instance_create_depth(x,y,depth+1,obj_flame);
+			
+			// Screen shake for flamethrower
+			/*if (keepX == -1) {
+				keepX = obj_camera.x;
+				keepY = obj_camera.y;
+			}
+			var shakeX = random_range(-4,4);
+			var shakeY = random_range(-4,4);
+			obj_camera.x += shakeX + keepX;
+			obj_camera.y += shakeY + keepY;
+		}
+		else {
+			keepX = -1;	
+		}*/
+		
 		}
 	}
 }
