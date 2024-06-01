@@ -41,22 +41,22 @@ if (spear_in_hand) {
 
             if (distance_to_player > 150) {
                 my_spear.speed = 12;
-                my_spear.gravity = 0.3;
+                my_spear.gravity = 0.05;
                 my_spear.resistance = 0.1;
                 my_spear.direction = point_direction(x, y, target.x, target.y) - 15;
-                my_spear.hspeed = lengthdir_x(my_spear.speed, my_spear.direction);
-                my_spear.vspeed = lengthdir_y(my_spear.speed, my_spear.direction);
+                my_spear.hspeed = lengthdir_x(my_spear.speed, my_spear.direction) / 1.8;
+                my_spear.vspeed = lengthdir_y(my_spear.speed, my_spear.direction) / 1.8;
 
                 // Detach spear from skeleton
                 my_spear = noone;
                 spear_in_hand = false;
             } else if (distance_to_player > 0) {
-                my_spear.speed = 10;
-                my_spear.gravity = 0.3;
+                my_spear.speed = 12;
+                my_spear.gravity = 0.05;
                 my_spear.resistance = 0.1;
                 my_spear.direction = point_direction(x, y, target.x, target.y);
-                my_spear.hspeed = lengthdir_x(my_spear.speed, my_spear.direction);
-                my_spear.vspeed = lengthdir_y(my_spear.speed, my_spear.direction);
+                my_spear.hspeed = lengthdir_x(my_spear.speed, my_spear.direction) / 1.8;
+                my_spear.vspeed = lengthdir_y(my_spear.speed, my_spear.direction) / 1.8;
 
                 // Detach spear from skeleton
                 my_spear = noone;
