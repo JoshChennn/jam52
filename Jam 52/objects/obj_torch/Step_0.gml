@@ -10,3 +10,7 @@ else {
 
 // Create dream effect
 if dreamMode scr_dream();
+else {
+	if instance_exists(obj_bubble) instance_destroy(obj_bubble);
+	obj_player.in_bubble = false;
+}
