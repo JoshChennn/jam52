@@ -2,12 +2,14 @@
 
 hp = 15; 
 flash = 0; 
-move_speed = 1.5; 
+move_speed = 1.8; 
 horspeed = 0;
 verspeed = 0;
 
+hit_cooldown = 0;
+
 reconsider = 60;
-increment = 100;
+increment = random_range(20, 100);
 
 start_loc_x = x;
 start_loc_y = y;

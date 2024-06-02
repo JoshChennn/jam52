@@ -19,9 +19,7 @@ function has_line_of_sight(bat_x, bat_y, player_x, player_y) {
 
 var distance_to_player = point_distance(x, y, obj_player.x, obj_player.y);
 
-
-// If player is within range and bat has line of sight to the player
-if (distance_to_player < detection_range / 2 && has_line_of_sight(x, y, obj_player.x, obj_player.y)) {
+if (distance_to_player < detection_range / 4 && has_line_of_sight(x, y, obj_player.x, obj_player.y)) {
     show_debug_message("I see you");
 	
 	if (attacking_multipier < 2) {
@@ -38,22 +36,45 @@ if (distance_to_player < detection_range / 2 && has_line_of_sight(x, y, obj_play
         dir_x /= distance;
         dir_y /= distance;
     }
+	
+	    // Apply randomness to the direction
+    dir_x += random_range(-0.25, 0.25);
+    dir_y += random_range(-0.25, 0.25);
+
+    // Normalize the direction again
+    var random_distance = point_distance(0, 0, dir_x, dir_y);
+    if (random_distance != 0) {
+        dir_x /= random_distance;
+        dir_y /= random_distance;
+    }
         
     var new_x = x + dir_x * move_speed * attacking_multipier;
     var new_y = y + dir_y * move_speed * attacking_multipier;
-        
-		
-    if (wall_collision(new_x, y)) {
-        x = x - dir_x * move_speed * attacking_multipier;  
-    } else {
-        x = new_x;
-    }
+    
+	if (hit_cooldown > 0) {
+		if (wall_collision(x - dir_x * move_speed * attacking_multipier, y)) {
+	        x = new_x;
+			hit_cooldown = -1;
+	    } else { x = x - dir_x * move_speed * attacking_multipier; }
 
-    if (wall_collision(x, new_y)) {
-        y =  y - dir_y * move_speed * attacking_multipier; 
-    } else {
-        y = new_y;
-    }
+	    if (wall_collision(x, y - dir_y * move_speed * attacking_multipier)) {
+	      y = new_y;
+		  hit_cooldown = -1;
+	    } else { y =  y - dir_y * move_speed * attacking_multipier; }
+	}
+	else {
+	    if (wall_collision(new_x, y)) {
+	        x = x - dir_x * move_speed * attacking_multipier;  
+	    } else {
+	        x = new_x;
+	    }
+
+	    if (wall_collision(x, new_y)) {
+	        y =  y - dir_y * move_speed * attacking_multipier; 
+	    } else {
+	        y = new_y;
+	    }
+	}
 	
 } else if (distance_to_player < detection_range) {
 	if (attacking_multipier > 1) { attacking_multipier -= 0.05; }
@@ -66,6 +87,17 @@ if (distance_to_player < detection_range / 2 && has_line_of_sight(x, y, obj_play
     if (distance != 0) {
         dir_x /= distance;
         dir_y /= distance;
+    }
+	
+	// Apply randomness to the direction
+    dir_x += random_range(-0.5, 0.5);
+    dir_y += random_range(-0.5, 0.5);
+
+    // Normalize the direction again
+    var random_distance = point_distance(0, 0, dir_x, dir_y);
+    if (random_distance != 0) {
+        dir_x /= random_distance;
+        dir_y /= random_distance;
     }
         
     var new_x = x + dir_x * move_speed * attacking_multipier;
@@ -88,7 +120,7 @@ if (distance_to_player < detection_range / 2 && has_line_of_sight(x, y, obj_play
 if (increment <= 0) {
     // Move to the next direction
     direction_index = (direction_index + 1) % array_length(directions);
-    increment = reconsider; 
+    increment = random_range(40,80); 
 }
 
 // If the player is not within detection range
@@ -120,6 +152,8 @@ if (distance_to_player > detection_range) {
 }
 
 increment--;
+flash --;
+hit_cooldown --;
 
 // Prevent the NPC from moving out of the room
 if (x < 0) {
