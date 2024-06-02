@@ -10,7 +10,6 @@ for (var i = 2; i < 32; i += 1) {
     var tangentAngle = arctan2(dy, dx) * 180 / pi;
 	
     if (rotate) {
-		if (angle = 115) { image_angle = 180; }
-		else if ( angle = 45 ) { image_angle = 0; }
+		image_angle += 5;
     }
 }
