@@ -9,6 +9,8 @@ verspeed = 0;
 walkspeed = 5;
 hp = 30;
 flash = 0;
+squash_x =  1;
+squash_y = 1;
 
 draw_xscale = 1;
 draw_yscale = 1;

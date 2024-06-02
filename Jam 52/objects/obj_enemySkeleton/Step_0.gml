@@ -178,5 +178,17 @@ if (wall_collision(x, y + verspeed)) {
     }
     verspeed = 0;
 }
+if wall_collision(x,y+1) and !wall_collision(x,yprevious+1) {
+	repeat (20)  { 
+		var a = instance_create_layer(x+random_range(-20,20),y+27,"Instances",obj_groundParticle); 
+		a.direction = random(20)+choose(0,160);
+	}
+}
+if horspeed != 0 and wall_collision(x,y+1) {
+	if irandom(2) == 0 {
+		var a = instance_create_layer(x+random_range(-20,20),y+27,"Instances",obj_groundParticle);
+		a.direction = random(20)+(image_xscale == 1 ? 160 : 0);
+	}
+}
 
 y += verspeed;

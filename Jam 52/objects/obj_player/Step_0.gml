@@ -47,6 +47,15 @@ if (wall_collision(x, y + verspeed)) {
 
 y = y + verspeed;
 
+if horspeed == 0 {
+	squash_x = 1.1;
+	squash_y = 0.95;
+}
+else {
+	squash_x = 1;
+	squash_y = 1;
+}
+
 if (wall_collision(x,y+1) and !wall_collision(x,yprevious+1)) {
 	draw_yscale = .65; 
 	draw_xscale = 1.4*image_xscale;
@@ -78,8 +87,8 @@ else if (horspeed < 0) {
 	draw_xscale = -abs(draw_xscale);
 }
 
-draw_xscale = lerp(draw_xscale, image_xscale, .09);
-draw_yscale = lerp(draw_yscale, 1, .09);
+draw_xscale = lerp(draw_xscale, image_xscale*squash_x, .09);
+draw_yscale = lerp(draw_yscale, squash_y, .09);
 
 if (flash > 0) flash--;
 
