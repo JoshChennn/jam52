@@ -11,4 +11,4 @@ hp = 30;
 flash = 0;
 
 instance_create_depth(x,y,depth+1,obj_torch);
-instance_create_depth(x,y,depth-1,obj_flamethrower);
+instance_create_depth(x,y,depth-2,obj_flamethrower);

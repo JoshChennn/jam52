@@ -58,6 +58,7 @@
     {"id":{"name":"obj_skeletonSpear","path":"objects/obj_skeletonSpear/obj_skeletonSpear.yy",},},
     {"id":{"name":"obj_smoke","path":"objects/obj_smoke/obj_smoke.yy",},},
     {"id":{"name":"obj_spikes","path":"objects/obj_spikes/obj_spikes.yy",},},
+    {"id":{"name":"obj_surfaces","path":"objects/obj_surfaces/obj_surfaces.yy",},},
     {"id":{"name":"obj_torch","path":"objects/obj_torch/obj_torch.yy",},},
     {"id":{"name":"obj_torchBar","path":"objects/obj_torchBar/obj_torchBar.yy",},},
     {"id":{"name":"obj_wall","path":"objects/obj_wall/obj_wall.yy",},},
