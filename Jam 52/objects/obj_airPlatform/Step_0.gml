@@ -1,1 +1,1 @@
-instance_create_layer(x+irandom_range(-100,100),y,"Instances",obj_airParticle);
+//instance_create_layer(x+irandom_range(-100,100),y,"Instances",obj_airParticle);
