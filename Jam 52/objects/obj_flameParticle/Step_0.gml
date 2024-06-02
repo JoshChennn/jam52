@@ -12,12 +12,12 @@ lifespan += 1;
 // Check for collision with walls
 var collided = false;
 
-if (place_meeting(x + hspeed, y, obj_wall)) {
+if (wall_collision(x + hspeed, y)) {
     hspeed = -hspeed; // Reverse horizontal speed
     collided = true;
 }
 
-if (place_meeting(x, y + vspeed, obj_wall)) {
+if (wall_collision(x, y + vspeed)) {
     vspeed = -vspeed; // Reverse vertical speed
     collided = true;
 }

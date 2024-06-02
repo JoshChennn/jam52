@@ -56,7 +56,7 @@ function scr_astar_path(startX, startY, endX, endY) {
                 var neighbor = string(neighborX) + "," + string(neighborY);
                 var tentative_g_score = ds_map_find_value(g_scores, current) + point_distance(currentX, currentY, neighborX, neighborY);
 
-                if (place_meeting(neighborX, neighborY, obj_wall)) {
+                if (wall_collision(neighborX, neighborY)) {
                     tentative_g_score += point_distance(currentX, currentY, neighborX, neighborY); // Half speed through walls
                 }
 

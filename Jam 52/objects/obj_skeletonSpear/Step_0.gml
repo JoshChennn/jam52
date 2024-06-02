@@ -22,7 +22,7 @@ if (place_meeting(x, y, obj_player)) {
 }
 cooldown --;
 // Check for collision with walls
-if (place_meeting(x, y, obj_wall) && !place_meeting(x, y, obj_enemySkeleton)) {
+if (wall_collision(x, y) && !place_meeting(x, y, obj_enemySkeleton)) {
     instance_destroy(); // Destroy the spear upon collision with a wall
 }
 

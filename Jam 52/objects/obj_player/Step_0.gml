@@ -12,11 +12,11 @@ horspeed = move * walkspeed;
 verspeed = verspeed + grvty;
 
 // Check for wall collision on left and right
-var wall_left = place_meeting(x - 1, y, obj_wall);
-var wall_right = place_meeting(x + 1, y, obj_wall);
+var wall_left = wall_collision(x - 1, y);
+var wall_right = wall_collision(x + 1, y);
 
 // Jumping 
-if (place_meeting(x, y + 1, obj_wall)) {
+if (wall_collision(x, y + 1)) {
 	if (key_jump) {
 	    verspeed = jump_height;
 		draw_yscale = 1.5;
@@ -28,8 +28,8 @@ with obj_airPlatform {
 }
 
 // Horizontal Collisions
-if (place_meeting(x + horspeed, y, obj_wall)) {
-	while (!place_meeting(x + sign(horspeed), y, obj_wall)) {
+if (wall_collision(x + horspeed, y)) {
+	while (!wall_collision(x + sign(horspeed), y)) {
 	    x = x + sign(horspeed);
 	}
 	horspeed = 0;
@@ -38,8 +38,8 @@ if (place_meeting(x + horspeed, y, obj_wall)) {
 x = x + horspeed;
 
 // Vertical Collisions
-if (place_meeting(x, y + verspeed, obj_wall)) {
-	while (!place_meeting(x, y + sign(verspeed), obj_wall)) {
+if (wall_collision(x, y + verspeed)) {
+	while (!wall_collision(x, y + sign(verspeed))) {
 	    y = y + sign(verspeed);
 	}
 	verspeed = 0;
@@ -47,14 +47,14 @@ if (place_meeting(x, y + verspeed, obj_wall)) {
 
 y = y + verspeed;
 
-if (place_meeting(x,y+1,obj_wall) and !place_meeting(x,yprevious+1,obj_wall)) {
+if (wall_collision(x,y+1) and !wall_collision(x,yprevious+1)) {
 	draw_yscale = .65; 
 	draw_xscale = 1.4*image_xscale;
 }
 
 // Setting animation and sprite direction
 
-if (move != 0 and place_meeting(x,y+3,obj_wall)) {
+if (move != 0 and wall_collision(x,y+3)) {
 	sprite_index = spr_playerWalking;
 }
 else {

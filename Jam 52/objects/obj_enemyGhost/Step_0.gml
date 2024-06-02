@@ -153,7 +153,7 @@ if (place_meeting(x, y, obj_player)) {
 }
 
 // Collision with walls
-if (place_meeting(x, y, obj_wall)) {
+if (wall_collision(x, y)) {
     image_alpha = half_opacity; // Set opacity to 50%
     move_speed = 1;
 } else {

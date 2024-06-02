@@ -9,7 +9,7 @@ if (hp <= 0) {
             instance_destroy(my_spear); // Destroy the spear if it's in hand
         }
     }
-    while (!place_meeting(x, y + 1, obj_wall)) {
+    while (!wall_collision(x, y + 1)) {
         y += 1; // Make the skeleton fall to the ground
     }
     return;
@@ -72,7 +72,7 @@ if (!variable_instance_exists(self, "random_movement")) {
     random_movement = false;
 }
 
-if (place_meeting(x + horspeed, y, obj_wall)) {
+if (wall_collision(x + horspeed, y)) {
     verspeed = -jump_strength;
 	jump_strength = 0;
 	jump_cooldown = 60;
@@ -112,7 +112,7 @@ if (decision_timer <= 0) {
         }
         
         // Jumping if near player and on the ground
-        if (place_meeting(x, y + 1, obj_wall) && abs(dy_to_player) > 48) {
+        if (wall_collision(x, y + 1) && abs(dy_to_player) > 48) {
             verspeed = -jump_strength;
             jump_strength = 0;
             jump_cooldown = 60;
@@ -154,8 +154,8 @@ if (decision_timer <= 0) {
 verspeed += grvty;
 
 // Horizontal Collisions
-if (place_meeting(x + horspeed, y, obj_wall)) {
-    while (!place_meeting(x + sign(horspeed), y, obj_wall)) {
+if (wall_collision(x + horspeed, y)) {
+    while (!wall_collision(x + sign(horspeed), y)) {
         x += sign(horspeed);
     }
     // Try to jump over the wall
@@ -163,7 +163,7 @@ if (place_meeting(x + horspeed, y, obj_wall)) {
 	jump_strength = 0;
 	jump_cooldown = 60;
     horspeed = sign(horspeed) * walkspeed;
-    if (place_meeting(x + horspeed, y, obj_wall)) {
+    if (wall_collision(x + horspeed, y)) {
         // If still colliding, turn around
         horspeed = 0;
     }
@@ -172,8 +172,8 @@ if (place_meeting(x + horspeed, y, obj_wall)) {
 x += horspeed;
 
 // Vertical Collisions
-if (place_meeting(x, y + verspeed, obj_wall)) {
-    while (!place_meeting(x, y + sign(verspeed), obj_wall)) {
+if (wall_collision(x, y + verspeed)) {
+    while (!wall_collision(x, y + sign(verspeed))) {
         y += sign(verspeed);
     }
     verspeed = 0;
