@@ -31,27 +31,6 @@ with obj_airPlatform {
 	if x-100 < other.x and x+100 > other.x and other.y < y and other.y > y-400 other.verspeed -= 0.8;
 }
 
-var closest = 0;
-if obj_torch.dreamMode {
-	closest = instance_nearest(x,y-41,obj_wallDream);
-}
-else {
-	closest = instance_nearest(x,y-41,obj_wall);
-}
-if wall_collision(x,y) {
-	if !position_meeting(x,y-41,closest) {
-		var move_dir = point_direction(closest.x+closest.sprite_width/2,closest.y+closest.sprite_height/2,x,y-41);
-		while place_meeting(x,y,closest) {
-			x += lengthdir_x(1,move_dir);
-			y += lengthdir_y(1,move_dir);
-			show_debug_message("Womp Womp");
-		}
-	}
-	else {
-		room_restart();
-	}
-}
-
 // Horizontal Collisions
 if (wall_collision(x + horspeed, y)) {
 	while (!wall_collision(x + sign(horspeed), y)) {
@@ -72,6 +51,8 @@ if (wall_collision(x, y + verspeed)) {
 
 y = y + verspeed;
 
+
+
 if horspeed == 0 {
 	squash_x = 1.1;
 	squash_y = 0.95;
@@ -79,6 +60,28 @@ if horspeed == 0 {
 else {
 	squash_x = 1;
 	squash_y = 1;
+}
+
+var closest = 0;
+if obj_torch.dreamMode {
+	closest = instance_nearest(x,y-41,obj_wallDream);
+}
+else {
+	closest = instance_nearest(x,y-41,obj_wall);
+}
+if place_meeting(x,y,closest) {
+	if !position_meeting(x,y-41,closest) {
+		var close_point = closest_edge(x,y-41,closest);
+		var move_dir = point_direction(close_point[0],close_point[1],x,y-41);
+		while place_meeting(x,y,closest) {
+			x += lengthdir_x(1,move_dir);
+			y += lengthdir_y(1,move_dir);
+			show_debug_message("Womp Womp");
+		}
+	}
+	else {
+		room_restart();
+	}
 }
 
 if (wall_collision(x,y+1) and !wall_collision(x,yprevious+1)) {

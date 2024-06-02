@@ -1,162 +1,117 @@
-/// @description Mechanics
-
-// Variables to store the random offset for each ghost
-if (!variable_instance_exists(self, "random_offset_x")) {
-    random_offset_x = random_range(-20, 20);
-}
-if (!variable_instance_exists(self, "random_offset_y")) {
-    random_offset_y = random_range(-20, 20);
-}
-
-// Variables for detection range modification
-if (!variable_instance_exists(self, "detection_range")) {
-    detection_range = base_detection_range;
-}
-if (!variable_instance_exists(self, "detection_range_timer")) {
-    detection_range_timer = 0;
-}
-
-// Timer for random movement
-if (!variable_instance_exists(self, "random_move_timer")) {
-    random_move_timer = 0;
-}
-
-// Random direction for movement
-if (!variable_instance_exists(self, "random_dir_x")) {
-    random_dir_x = random_range(-1, 1);
-}
-if (!variable_instance_exists(self, "random_dir_y")) {
-    random_dir_y = random_range(-1, 1);
-}
-
-// Probability counter for random movement and detection range modification
-if (!variable_instance_exists(self, "random_move_chance_timer")) {
-    random_move_chance_timer = 120; // 2 seconds at 60 fps
-}
-
-// Room boundaries
-var room_left = 0;
-var room_right = room_width;
-var room_top = 0;
-var room_bottom = room_height;
-
-// Get the distance to the player
-var distance_to_player = point_distance(x, y, target.x, target.y);
-
-if (flash > 0) flash--;
-
+// If dead, float up
 if (hp <= 0) {
     sprite_index = spr_deadGhost;
     y -= 1;
-    image_alpha = half_opacity;
+    image_alpha = 0.5;
     return;
 } else {
-    sprite_index = spr_ghost; // Use the appropriate sprite index for alive state
+    sprite_index = spr_ghost;
 }
 
-// Random movement logic
-var random_movement = false;
-if (random_move_timer > 0) {
-    random_movement = true;
-    random_move_timer--;
-} else if (random_move_chance_timer <= 0) {
-    // 1 in 5 chance for random movement even if within detection range
-    if (irandom(4) == 0) {
-        random_movement = true;
-        random_move_timer = 120; // 2 seconds at 60 fps
-    }
-    // 1 in 5 chance for quadrupling detection range for 4 seconds
-    if (irandom(frequency_of_increase) == 0) {
-        detection_range = base_detection_range * increase_in_detection_range;
-        detection_range_timer = increase_time; // 4 seconds at 60 fps
-    }
-    random_move_chance_timer = 120; // Reset the chance timer
-} else {
-    random_move_chance_timer--;
-}
+// Get the distance to the player
+var distance_to_player = point_distance(x, y, obj_player.x, obj_player.y);
 
-// Reset detection range if timer expires
-if (detection_range_timer > 0) {
-    detection_range_timer--;
-} else {
-    detection_range = base_detection_range;
-}
+if (distance_to_player <= detection_range / 4 && cooldown < 0) {
+    if (buildup == 100) {
+        dir_x = (obj_player.x - x);
+        dir_y = (obj_player.y - y);
 
-if (random_movement) {
-    // Normalize the random direction
-    var random_distance = point_distance(0, 0, random_dir_x, random_dir_y);
-    if (random_distance != 0) {
-        random_dir_x /= random_distance;
-        random_dir_y /= random_distance;
+        // Normalize the direction
+        var length = point_distance(0, 0, dir_x, dir_y);
+        if (length != 0) {
+            dir_x /= length;
+            dir_y /= length;
+        }
+    } else if (buildup > 100) {
+        x += dir_x * move_speed * 4;
+        y += dir_y * move_speed * 4;
+
+        if (buildup > 130) {
+            buildup = 0;
+            cooldown = 60;
+        }
     }
-
-    // Move in the random direction
-    x += random_dir_x * move_speed;
-    y += random_dir_y * move_speed;
+    buildup++;
 } else if (distance_to_player <= detection_range) {
-    // Get the direction towards the player with some randomness
-    var dir_x = (target.x - x) + random_offset_x;
-    var dir_y = (target.y - y) + random_offset_y;
+    // Get the direction towards the player
+    dir_x = (obj_player.x - x);
+    dir_y = (obj_player.y - y);
 
     // Normalize the direction
-    if (distance_to_player != 0) {
-        dir_x /= distance_to_player;
-        dir_y /= distance_to_player;
+    var length = point_distance(0, 0, dir_x, dir_y);
+    if (length != 0) {
+        dir_x /= length;
+        dir_y /= length;
     }
 
-    // Move towards the player
     x += dir_x * move_speed;
     y += dir_y * move_speed;
 } else {
-    // Normal random movement when not aware of the player
-    if (random_move_timer <= 0) {
-        // Pick a new random direction
-        random_dir_x = random_range(-1, 1);
-        random_dir_y = random_range(-1, 1);
+    if (increment < 0) {
+        increment = random_range(20, 80);
+        dir_x = random_range(-5, 5);
+        dir_y = random_range(-5, 5);
 
-        // Reset the timer (120 steps = 2 seconds at 60 fps)
-        random_move_timer = 120;
+        // Normalize the direction
+        var length = point_distance(0, 0, dir_x, dir_y);
+        if (length != 0) {
+            dir_x /= length;
+            dir_y /= length;
+        }
     }
-
-    // Normalize the random direction
-    var random_distance = point_distance(0, 0, random_dir_x, random_dir_y);
-    if (random_distance != 0) {
-        random_dir_x /= random_distance;
-        random_dir_y /= random_distance;
-    }
-
+    show_debug_message(dir_x);
     // Move in the random direction
-    x += random_dir_x * move_speed;
-    y += random_dir_y * move_speed;
-
-    // Decrease the timer
-    random_move_timer--;
+    x += dir_x * move_speed;
+    y += dir_y * move_speed;
 }
 
-// Prevent the ghost from moving out of the room
-if (x < room_left) {
-    x = room_left;
-}
-if (x > room_right) {
-    x = room_right;
-}
-if (y < room_top) {
-    y = room_top;
-}
-if (y > room_bottom) {
-    y = room_bottom;
+// Ensure maximum overlap of 50% with any other obj_ghost
+var ghost_list = ds_list_create();
+instance_place_list(x, y, obj_enemyGhost, ghost_list, false);
+
+for (var i = 0; i < ds_list_size(ghost_list); i++) {
+    var other_ghost = ds_list_find_value(ghost_list, i);
+    if (other_ghost != id) {
+        var overlap_x = abs(x - other_ghost.x);
+        var overlap_y = abs(y - other_ghost.y);
+        if (overlap_x < sprite_width / 2 && overlap_y < sprite_height / 2) {
+            x += (sprite_width / 2 - overlap_x) / 2 * sign(x - other_ghost.x);
+            y += (sprite_height / 2 - overlap_y) / 2 * sign(y - other_ghost.y);
+        }
+    }
 }
 
-// Collision with player
-if (place_meeting(x, y, obj_player)) {
-    image_alpha = half_opacity;
-}
+ds_list_destroy(ghost_list);
 
-// Collision with walls
-if (wall_collision(x, y)) {
-    image_alpha = half_opacity; // Set opacity to 50%
-    move_speed = 1;
+if (dir_x > 0) {
+    image_xscale = 1;
 } else {
-    image_alpha = normal_opacity; // Set opacity to normal
+    image_xscale = -1;
+}
+
+if (wall_collision(x, y)) {
+    image_alpha = 0.5;
+    move_speed = 1.5;
+} else {
+    image_alpha = 1;
     move_speed = 2;
 }
+
+cooldown--;
+
+// Prevent the NPC from moving out of the room
+if (x < 0) {
+    x = 0;
+}
+if (x > room_width) {
+    x = room_width;
+}
+if (y < 0) {
+    y = 0;
+}
+if (y > room_height) {
+    y = room_height;
+}
+
+increment--;
+flash--;

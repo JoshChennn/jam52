@@ -6,3 +6,8 @@ function wall_collision(_x,_y){
 	}
 	else return place_meeting(_x,_y,obj_wall);
 }
+function closest_edge(_x,_y,object) {
+	var close_x = max(object.x,min(_x,object.x+object.sprite_width));
+	var close_y = max(object.y,min(_y,object.y+object.sprite_height));
+	return [close_x,close_y];
+}
