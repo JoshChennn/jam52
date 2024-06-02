@@ -7,7 +7,7 @@ function scr_surfaces() {
 	switch (object_index) {
 		// for each object that changes, draw the nightmare-state sprite
 		case obj_enemyBat:
-			draw_sprite(spr_bat,0,x,y);
+			draw_sprite(spr_bat,image_index,x,y);
 			break;
 	}
 	
