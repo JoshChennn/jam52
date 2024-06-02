@@ -1,12 +1,12 @@
-/// @description Move the spear and handle collisions
-
-// Move the spear
-x += hspeed;
-y += vspeed;
-
-// Update image angle to match direction of movement
-if (hspeed > 0) {
-	image_angle = point_direction(0, 0, hspeed, vspeed);
+if (!shoot) {
+    if (should_shoot) {
+        shoot = true;
+        direction = angle;
+        speed = fast;
+        rotate = true;
+    }
+} else {
+    gravity = gra;
 }
 
 // Check for collision with the player
@@ -18,19 +18,9 @@ if (place_meeting(x, y, obj_player)) {
 			cooldown = 120;
 	    }
 	}
-    if (!place_meeting(x, y, obj_enemySkeleton)) instance_destroy();
 }
 cooldown --;
 // Check for collision with walls
 if (wall_collision(x, y) && !place_meeting(x, y, obj_enemySkeleton)) {
     instance_destroy(); // Destroy the spear upon collision with a wall
 }
-
-if (abs(hspeed) < resistance) {
-    hspeed = 0;
-} else {
-    hspeed -= sign(hspeed) * resistance;
-}
-
-vspeed += gravity;
-y += vspeed;

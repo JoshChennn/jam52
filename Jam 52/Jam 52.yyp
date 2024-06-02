@@ -63,7 +63,6 @@
     {"id":{"name":"obj_parallax","path":"objects/obj_parallax/obj_parallax.yy",},},
     {"id":{"name":"obj_player","path":"objects/obj_player/obj_player.yy",},},
     {"id":{"name":"obj_skeletonBossSpear","path":"objects/obj_skeletonBossSpear/obj_skeletonBossSpear.yy",},},
-    {"id":{"name":"obj_skeletonSpear","path":"objects/obj_skeletonSpear/obj_skeletonSpear.yy",},},
     {"id":{"name":"obj_smoke","path":"objects/obj_smoke/obj_smoke.yy",},},
     {"id":{"name":"obj_spikes","path":"objects/obj_spikes/obj_spikes.yy",},},
     {"id":{"name":"obj_spikesDream","path":"objects/obj_spikesDream/obj_spikesDream.yy",},},

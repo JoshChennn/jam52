@@ -18,7 +18,6 @@ if (place_meeting(x, y, obj_player)) {
 			cooldown = 120;
 	    }
 	}
-    if (!place_meeting(x, y, obj_enemySkeleton)) instance_destroy();
 }
 cooldown --;
 // Check for collision with walls
