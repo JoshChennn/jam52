@@ -27,6 +27,27 @@ with obj_airPlatform {
 	if x-100 < other.x and x+100 > other.x and other.y < y and other.y > y-400 other.verspeed -= 0.8;
 }
 
+var closest = 0;
+if obj_torch.dreamMode {
+	closest = instance_nearest(x,y-41,obj_wallDream);
+}
+else {
+	closest = instance_nearest(x,y-41,obj_wall);
+}
+if wall_collision(x,y) {
+	if !position_meeting(x,y-41,closest) {
+		var move_dir = point_direction(closest.x+closest.sprite_width/2,closest.y+closest.sprite_height/2,x,y-41);
+		while place_meeting(x,y,closest) {
+			x += lengthdir_x(1,move_dir);
+			y += lengthdir_y(1,move_dir);
+			show_debug_message("Womp Womp");
+		}
+	}
+	else {
+		room_restart();
+	}
+}
+
 // Horizontal Collisions
 if (wall_collision(x + horspeed, y)) {
 	while (!wall_collision(x + sign(horspeed), y)) {
