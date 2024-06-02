@@ -6,3 +6,5 @@ scale = 2;
 rotate = false;
 should_shoot = false;
 starting_angle = 270;
+cooldown = 100;
+damage = 10;
