@@ -1,11 +1,9 @@
 {
   "$GMObject":"",
-  "%Name":"obj_wall",
-  "eventList":[
-    {"$GMEvent":"","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":3,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
-  ],
+  "%Name":"obj_wallDream",
+  "eventList":[],
   "managed":true,
-  "name":"obj_wall",
+  "name":"obj_wallDream",
   "overriddenProperties":[],
   "parent":{
     "name":"Objects",
@@ -30,8 +28,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"spr_wall",
-    "path":"sprites/spr_wall/spr_wall.yy",
+    "name":"spr_wallDream",
+    "path":"sprites/spr_wallDream/spr_wallDream.yy",
   },
   "spriteMaskId":null,
   "visible":true,
