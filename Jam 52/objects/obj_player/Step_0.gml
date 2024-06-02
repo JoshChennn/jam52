@@ -20,7 +20,7 @@ if (place_meeting(x, y + 1, obj_wall)) {
 	if (key_jump) {
 	    verspeed = jump_height;
 		draw_yscale = 1.5;
-		draw_xscale = .75;
+		draw_xscale = .75*image_xscale;
 	}
 }
 
@@ -45,8 +45,8 @@ if (place_meeting(x, y + verspeed, obj_wall)) {
 y = y + verspeed;
 
 if (place_meeting(x,y+1,obj_wall) and !place_meeting(x,yprevious+1,obj_wall)) {
-	draw_yscale = .75; 
-	draw_xscale = 1.25;
+	draw_yscale = .65; 
+	draw_xscale = 1.4*image_xscale;
 }
 
 // Setting animation and sprite direction
@@ -67,8 +67,8 @@ else if (horspeed < 0) {
 	draw_xscale = -abs(draw_xscale);
 }
 
-draw_xscale = lerp(draw_xscale, image_xscale, .1);
-draw_yscale = lerp(draw_yscale, 1, .1);
+draw_xscale = lerp(draw_xscale, image_xscale, .09);
+draw_yscale = lerp(draw_yscale, 1, .09);
 
 if (flash > 0) flash--;
 
