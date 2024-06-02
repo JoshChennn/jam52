@@ -1,10 +1,12 @@
-/// @description Initialize spear variables
-
+fast = 20;
+angle = 45;
+gra = 0.75;
+shoot = false;
+scale = 2;
+rotate = false;
+should_shoot = false;
+starting_angle = 270;
+cooldown = 100;
 damage = 10;
-speed = 0;
-direction = 0;
-hspeed = 0;
-vspeed = 0;
-gravity = 0;
-resistance = 0;
-cooldown = 0;
+image_xscale = 2;
+image_yscale = 2;

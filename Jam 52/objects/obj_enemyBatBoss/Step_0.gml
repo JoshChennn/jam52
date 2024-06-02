@@ -6,7 +6,7 @@ if (hp <= 0) {
     }
     return;
 } else {
-    sprite_index = spr_bat; 
+    sprite_index = spr_batBoss; 
 }
 
 function has_line_of_sight(bat_x, bat_y, player_x, player_y) {

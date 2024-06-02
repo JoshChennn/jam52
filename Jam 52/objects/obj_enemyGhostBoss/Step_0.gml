@@ -5,7 +5,7 @@ if (hp <= 0) {
     image_alpha = 0.5;
     return;
 } else {
-    sprite_index = spr_ghost;
+    sprite_index = spr_ghostBoss;
 }
 
 // Get the distance to the player
@@ -65,36 +65,28 @@ if (distance_to_player <= detection_range / 4 && cooldown < 0) {
     y += dir_y * move_speed;
 }
 
-// Ensure maximum overlap of 50% with any other obj_ghost
-var ghost_list = ds_list_create();
-instance_place_list(x, y, obj_enemyGhost, ghost_list, false);
-
-for (var i = 0; i < ds_list_size(ghost_list); i++) {
-    var other_ghost = ds_list_find_value(ghost_list, i);
-    if (other_ghost != id) {
-        var overlap_x = abs(x - other_ghost.x);
-        var overlap_y = abs(y - other_ghost.y);
-        if (overlap_x < sprite_width / 2 && overlap_y < sprite_height / 2) {
-            x += (sprite_width / 2 - overlap_x) / 2 * sign(x - other_ghost.x);
-            y += (sprite_height / 2 - overlap_y) / 2 * sign(y - other_ghost.y);
-        }
-    }
-}
-
-ds_list_destroy(ghost_list);
 
 if (dir_x > 0) {
-    image_xscale = 1;
+    image_xscale = 0.3;
 } else {
-    image_xscale = -1;
+    image_xscale = -0.3;
 }
 
-if (wall_collision(x, y)) {
-    image_alpha = 0.5;
-    move_speed = 1.5;
+if (invisble_timer < 0) {
+	image_alpha = 0.01;
+	move_speed = 4;
+	if (invisble_timer < -120) {
+		move_speed = 2;
+		invisble_timer = 240;
+	}
 } else {
-    image_alpha = 1;
-    move_speed = 2;
+	if (wall_collision(x, y)) {
+		image_alpha = 0.5;
+		move_speed = 1.5;
+	} else {
+	    image_alpha = 1;
+	    move_speed = 2;
+	}
 }
 
 cooldown--;
@@ -115,3 +107,4 @@ if (y > room_height) {
 
 increment--;
 flash--;
+invisble_timer --;
