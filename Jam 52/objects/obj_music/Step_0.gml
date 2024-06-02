@@ -2,6 +2,7 @@ switch (room) {
 	case rm_tutorial:
 	case rm_testLevel:
 	case rm_level1:
+	case rm_level2:
 	case rm_level3:
 		room_sound = snd_nightmare;
 		break;
