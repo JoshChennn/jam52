@@ -1,5 +1,38 @@
-// Add this at the beginning of the Step event
-show_debug_message("Ghost Step Event: Start");
+/// @description Mechanics
+
+// Variables to store the random offset for each ghost
+if (!variable_instance_exists(self, "random_offset_x")) {
+    random_offset_x = random_range(-20, 20);
+}
+if (!variable_instance_exists(self, "random_offset_y")) {
+    random_offset_y = random_range(-20, 20);
+}
+
+// Variables for detection range modification
+if (!variable_instance_exists(self, "detection_range")) {
+    detection_range = base_detection_range;
+}
+if (!variable_instance_exists(self, "detection_range_timer")) {
+    detection_range_timer = 0;
+}
+
+// Timer for random movement
+if (!variable_instance_exists(self, "random_move_timer")) {
+    random_move_timer = 0;
+}
+
+// Random direction for movement
+if (!variable_instance_exists(self, "random_dir_x")) {
+    random_dir_x = random_range(-1, 1);
+}
+if (!variable_instance_exists(self, "random_dir_y")) {
+    random_dir_y = random_range(-1, 1);
+}
+
+// Probability counter for random movement and detection range modification
+if (!variable_instance_exists(self, "random_move_chance_timer")) {
+    random_move_chance_timer = 120; // 2 seconds at 60 fps
+}
 
 // Room boundaries
 var room_left = 0;
@@ -16,7 +49,6 @@ if (hp <= 0) {
     sprite_index = spr_deadGhost;
     y -= 1;
     image_alpha = half_opacity;
-    show_debug_message("Ghost is dead");
     return;
 } else {
     sprite_index = spr_ghost; // Use the appropriate sprite index for alive state
@@ -29,7 +61,16 @@ if (random_move_timer > 0) {
     random_move_timer--;
 } else if (random_move_chance_timer <= 0) {
     // 1 in 5 chance for random movement even if within detection range
-    random_move_chance_timer = 20; // Reset the chance timer
+    if (irandom(4) == 0) {
+        random_movement = true;
+        random_move_timer = 120; // 2 seconds at 60 fps
+    }
+    // 1 in 5 chance for quadrupling detection range for 4 seconds
+    if (irandom(frequency_of_increase) == 0) {
+        detection_range = base_detection_range * increase_in_detection_range;
+        detection_range_timer = increase_time; // 4 seconds at 60 fps
+    }
+    random_move_chance_timer = 120; // Reset the chance timer
 } else {
     random_move_chance_timer--;
 }
@@ -52,30 +93,44 @@ if (random_movement) {
     // Move in the random direction
     x += random_dir_x * move_speed;
     y += random_dir_y * move_speed;
-    show_debug_message("Ghost moving randomly");
 } else if (distance_to_player <= detection_range) {
-    show_debug_message("Player detected");
-
-    // Increase detection range and set timer
-    detection_range = base_detection_range * 4;
-    detection_range_timer = 120; // 2 seconds at 60 fps
-
-    // Move towards the player with some randomness
+    // Get the direction towards the player with some randomness
     var dir_x = (target.x - x) + random_offset_x;
     var dir_y = (target.y - y) + random_offset_y;
 
     // Normalize the direction
-    var dir_distance = point_distance(0, 0, dir_x, dir_y);
-    if (dir_distance != 0) {
-        dir_x /= dir_distance;
-        dir_y /= dir_distance;
+    if (distance_to_player != 0) {
+        dir_x /= distance_to_player;
+        dir_y /= distance_to_player;
     }
 
     // Move towards the player
     x += dir_x * move_speed;
     y += dir_y * move_speed;
 } else {
-    show_debug_message("Player not detected, no movement");
+    // Normal random movement when not aware of the player
+    if (random_move_timer <= 0) {
+        // Pick a new random direction
+        random_dir_x = random_range(-1, 1);
+        random_dir_y = random_range(-1, 1);
+
+        // Reset the timer (120 steps = 2 seconds at 60 fps)
+        random_move_timer = 120;
+    }
+
+    // Normalize the random direction
+    var random_distance = point_distance(0, 0, random_dir_x, random_dir_y);
+    if (random_distance != 0) {
+        random_dir_x /= random_distance;
+        random_dir_y /= random_distance;
+    }
+
+    // Move in the random direction
+    x += random_dir_x * move_speed;
+    y += random_dir_y * move_speed;
+
+    // Decrease the timer
+    random_move_timer--;
 }
 
 // Prevent the ghost from moving out of the room
@@ -95,33 +150,13 @@ if (y > room_bottom) {
 // Collision with player
 if (place_meeting(x, y, obj_player)) {
     image_alpha = half_opacity;
-    show_debug_message("Collision with player");
 }
 
 // Collision with walls
 if (place_meeting(x, y, obj_wall)) {
     image_alpha = half_opacity; // Set opacity to 50%
     move_speed = 1;
-    show_debug_message("Collision with wall");
 } else {
     image_alpha = normal_opacity; // Set opacity to normal
     move_speed = 2;
 }
-
-// Setting sprite direction
-if (variable_instance_exists(self, "dir_x")) {
-    if (x < obj_player) {    
-        image_xscale = 1;
-    }
-    else {
-        image_xscale = -1;    
-    }
-} else {
-    if (random_dir_x > 0) {    
-        image_xscale = 1;
-    } else {
-        image_xscale = -1;    
-    }
-}
-
-show_debug_message("Ghost Step Event: End");
