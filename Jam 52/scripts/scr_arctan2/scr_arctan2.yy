@@ -1,0 +1,13 @@
+{
+  "$GMScript":"",
+  "%Name":"scr_arctan2",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_arctan2",
+  "parent":{
+    "name":"Scripts",
+    "path":"folders/Scripts.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}
