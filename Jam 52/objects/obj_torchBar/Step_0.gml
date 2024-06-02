@@ -1,4 +1,6 @@
-time--;
+if (instance_exists(obj_torch) and obj_torch.dreamMode) {
+	time--;
+}
 
 if (time <= 0) {
 	room_restart();	

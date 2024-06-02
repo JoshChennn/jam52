@@ -1,2 +1,2 @@
-timeTotal = 60 * 60;
+timeTotal = 60 * 15;
 time = timeTotal;
