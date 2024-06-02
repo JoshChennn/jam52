@@ -1,5 +1,6 @@
 // If dead
 if (hp <= 0) {
+	if sprite_index != spr_deadSkeleton repeat (15) { instance_create_layer(x,y,"Instances", obj_deadParticle); }
     sprite_index = spr_deadSkeleton;
     image_alpha = 0.5; 
     if (my_spear != noone) {

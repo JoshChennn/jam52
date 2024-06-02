@@ -3,7 +3,10 @@ if(keyboard_check(ord("R"))) { room_restart(); }
 
 // Lock in room/goto next
 x = clamp(x,10,room_width+100);
-if x > room_width + sprite_width/2 room_goto_next();
+if x > room_width + sprite_width/2 {
+	obj_transition.target_room = room_next(room);
+	obj_transition.fade_rate = 0.02;
+}
 
 // Get player input
 var key_left = keyboard_check(vk_left) || keyboard_check(ord("A"));
@@ -127,7 +130,7 @@ if (flash > 0) flash--;
 
 if (hp <= 0) and !dead {
 	dead = true;
+	obj_transition.fade_rate = 0.02;
 	instance_destroy(obj_flamethrower);
 	repeat (40) { instance_create_layer(x,y-41,"Instances", obj_deadParticle); }
-	alarm_set(0,60);
 }
