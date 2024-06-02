@@ -1,72 +1,64 @@
 /// @description Basic Mechanics
 
 if (hp <= 0) {
+    // Handle the skeleton's death state
     sprite_index = spr_deadSkeleton;
-    image_alpha = half_opacity;
+    image_alpha = 0.5; // Set to half opacity
     if (my_spear != noone) {
         if (spear_in_hand) {
-            instance_destroy(my_spear);
+            instance_destroy(my_spear); // Destroy the spear if it's in hand
         }
     }
     while (!place_meeting(x, y + 1, obj_wall)) {
-        y = y + 1;
+        y += 1; // Make the skeleton fall to the ground
     }
     return;
 } else {
-    sprite_index = spr_skeleton;
+    sprite_index = spr_skeleton; // Set to the alive skeleton sprite
 }
 
-if (flash > 0) flash--;
+if (flash > 0) flash--; // Decrease flash counter if it's greater than 0
 
 // Manage spear creation and throwing
 if (!spear_in_hand) {
     if (spear_throw_cooldown <= 0) {
-        my_spear = instance_create_depth(x, y, depth-1, obj_skeletonSpear);
-        spear_in_hand = true;
+        my_spear = instance_create_depth(x, y, depth - 1, obj_improvedSpear); // Create spear
+        spear_in_hand = true; // Set spear in hand
     }
 }
 
 if (spear_in_hand) {
+    // Update spear direction and position to follow the player
     my_spear.image_angle = point_direction(x, y, obj_player.x, obj_player.y);
     my_spear.x = x;
     my_spear.y = y - 10;
 
+    // Handle spear throwing
     if (spear_throw_cooldown <= -120) {
-        if (!collision_line(x, y, target.x, target.y, obj_wall, true, true)) {
-            spear_throw_cooldown = random_range(60, spear_throw_interval);
+        if (!collision_line(x, y, obj_player.x, obj_player.y, obj_wall, true, true)) {
+            spear_throw_cooldown = random_range(60, spear_throw_interval); // Reset cooldown
 
-            var dx_to_player = target.x - x;
-            var dy_to_player = target.y - y;
-            var distance_to_player = point_distance(x, y, target.x, target.y);
-
-            if (distance_to_player > 150) {
-                my_spear.speed = 12;
-                my_spear.gravity = 0.05;
-                my_spear.resistance = 0.1;
-                my_spear.direction = point_direction(x, y, target.x, target.y) - 15;
-                my_spear.hspeed = lengthdir_x(my_spear.speed, my_spear.direction) / 1.8;
-                my_spear.vspeed = lengthdir_y(my_spear.speed, my_spear.direction) / 1.8;
-
-                // Detach spear from skeleton
-                my_spear = noone;
-                spear_in_hand = false;
-            } else if (distance_to_player > 0) {
-                my_spear.speed = 12;
-                my_spear.gravity = 0.05;
-                my_spear.resistance = 0.1;
-                my_spear.direction = point_direction(x, y, target.x, target.y);
-                my_spear.hspeed = lengthdir_x(my_spear.speed, my_spear.direction) / 1.8;
-                my_spear.vspeed = lengthdir_y(my_spear.speed, my_spear.direction) / 1.8;
-
-                // Detach spear from skeleton
-                my_spear = noone;
-                spear_in_hand = false;
-            }
+            var distance_to_player = point_distance(x, y, obj_player.x, obj_player.y);
+			var angle_to_player = point_direction(x, y, obj_player.x, obj_player.y);
+			
+			my_spear.fast = abs((obj_player.x - x)) / 25;
+			
+			if (distance_to_player > 0)
+			if (obj_player.x - x > 0) {
+				my_spear.angle = 45;
+			} else {
+				my_spear.angle = 115;
+			}
+			my_spear.should_shoot = true;
+            
+            // Detach spear from skeleton
+            my_spear = noone;
+            spear_in_hand = false;
         }
     }
 }
 
-spear_throw_cooldown--;
+spear_throw_cooldown--; // Decrease cooldown counter
 
 if (jump_cooldown > 0) { jump_strength = 0; }
 else { jump_strength = 10; }
