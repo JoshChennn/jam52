@@ -1,4 +1,4 @@
-var grow = random_range(0.01,0.03);
+var grow = random_range(0.1,0.3);
 
 if (hit_wall) {
 	image_xscale += grow-0.01;
