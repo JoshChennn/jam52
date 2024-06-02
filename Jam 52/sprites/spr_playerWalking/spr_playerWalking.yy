@@ -2,7 +2,7 @@
   "$GMSprite":"",
   "%Name":"spr_playerWalking",
   "bboxMode":2,
-  "bbox_bottom":82,
+  "bbox_bottom":93,
   "bbox_left":19,
   "bbox_right":66,
   "bbox_top":9,
