@@ -2,7 +2,7 @@
 
 if (hp <= 0) {
     sprite_index = spr_deadBat;
-    if (!place_meeting(x, y + 1, obj_wall)) {
+    if (!wall_collision(x, y + 1)) {
         y += 1;
     }
     return;
@@ -70,8 +70,8 @@ var new_x = x + current_dir_x * move_speed;
 var new_y = y + current_dir_y * move_speed;
 
 // Move in the direction with collision checks
-if (place_meeting(new_x, y, obj_wall)) {
-    while (place_meeting(new_x, y, obj_wall)) {
+if (wall_collision(new_x, y)) {
+    while (wall_collision(new_x, y)) {
         new_x -= sign(current_dir_x);
     }
     current_dir_x = -current_dir_x; // Reverse direction on collision
@@ -79,8 +79,8 @@ if (place_meeting(new_x, y, obj_wall)) {
     x = new_x;
 }
 
-if (place_meeting(x, new_y, obj_wall)) {
-    while (place_meeting(x, new_y, obj_wall)) {
+if (wall_collision(x, new_y)) {
+    while (wall_collision(x, new_y)) {
         new_y -= sign(current_dir_y);
     }
     current_dir_y = -current_dir_y; // Reverse direction on collision
@@ -120,8 +120,8 @@ if (distance_to_player <= detection_range/2) && (has_line_of_sight(x, y, obj_pla
     var new_y = y + dir_y * move_speed * attacking_multipier;
 
     // Horizontal Collisions
-	if (place_meeting(new_x, y, obj_wall)) {
-        while (place_meeting(new_x, y, obj_wall)) {
+	if (wall_collision(new_x, y)) {
+        while (wall_collision(new_x, y)) {
             new_x -= sign(new_x - x);
         }
         // 1 in 2 chance to move in a perpendicular direction
@@ -137,8 +137,8 @@ if (distance_to_player <= detection_range/2) && (has_line_of_sight(x, y, obj_pla
 	}
 
     // Vertical Collisions
-    if (place_meeting(x, new_y, obj_wall)) {
-        while (place_meeting(x, new_y, obj_wall)) {
+    if (wall_collision(x, new_y)) {
+        while (wall_collision(x, new_y)) {
             new_y -= sign(new_y - y);
         }
         // 1 in 2 chance to move in a perpendicular direction
@@ -186,8 +186,8 @@ else if (distance_to_player <= detection_range) {
     var new_y = y + dir_y * move_speed;
 
     // Horizontal Collisions
-	if (place_meeting(new_x, y, obj_wall)) {
-        while (place_meeting(new_x, y, obj_wall)) {
+	if (wall_collision(new_x, y)) {
+        while (wall_collision(new_x, y)) {
             new_x -= sign(new_x - x);
         }
         // 1 in 2 chance to move in a perpendicular direction
@@ -203,8 +203,8 @@ else if (distance_to_player <= detection_range) {
     }
 
     // Vertical Collisions
-    if (place_meeting(x, new_y, obj_wall)) {
-        while (place_meeting(x, new_y, obj_wall)) {
+    if (wall_collision(x, new_y)) {
+        while (wall_collision(x, new_y)) {
             new_y -= sign(new_y - y);
         }
         // 1 in 2 chance to move in a perpendicular direction
@@ -245,8 +245,8 @@ var new_x = x + current_dir_x * move_speed;
 var new_y = y + current_dir_y * move_speed;
 
 // Move in the direction with collision checks
-if (place_meeting(new_x, y, obj_wall)) {
-    while (place_meeting(new_x, y, obj_wall)) {
+if (wall_collision(new_x, y)) {
+    while (wall_collision(new_x, y)) {
         new_x -= sign(current_dir_x);
     }
     current_dir_x = -current_dir_x; // Reverse direction on collision
@@ -254,8 +254,8 @@ if (place_meeting(new_x, y, obj_wall)) {
     x = new_x;
 }
 
-if (place_meeting(x, new_y, obj_wall)) {
-    while (place_meeting(x, new_y, obj_wall)) {
+if (wall_collision(x, new_y)) {
+    while (wall_collision(x, new_y)) {
         new_y -= sign(current_dir_y);
     }
     current_dir_y = -current_dir_y; // Reverse direction on collision

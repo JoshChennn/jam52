@@ -1,3 +1,3 @@
 /// @description Collision
 
-if (place_meeting(x, y+1, obj_wall)) speed = 0;
+if (wall_collision(x, y+1)) speed = 0;

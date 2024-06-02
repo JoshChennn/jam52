@@ -80,6 +80,7 @@
     {"id":{"name":"scr_dream","path":"scripts/scr_dream/scr_dream.yy",},},
     {"id":{"name":"scr_spear_path","path":"scripts/scr_spear_path/scr_spear_path.yy",},},
     {"id":{"name":"scr_surfaces","path":"scripts/scr_surfaces/scr_surfaces.yy",},},
+    {"id":{"name":"wall_collide","path":"scripts/wall_collide/wall_collide.yy",},},
     {"id":{"name":"shRed","path":"shaders/shRed/shRed.yy",},},
     {"id":{"name":"shWhite","path":"shaders/shWhite/shWhite.yy",},},
     {"id":{"name":"snd_boss","path":"sounds/snd_boss/snd_boss.yy",},},
