@@ -8,3 +8,5 @@ should_shoot = false;
 starting_angle = 270;
 cooldown = 100;
 damage = 10;
+image_xscale = 0.75;
+image_yscale = 0.75;
