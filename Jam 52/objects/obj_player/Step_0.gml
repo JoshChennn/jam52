@@ -4,7 +4,7 @@ if(keyboard_check(ord("R"))) { room_restart(); }
 // Get player input
 var key_left = keyboard_check(vk_left) || keyboard_check(ord("A"));
 var key_right = keyboard_check(vk_right) || keyboard_check(ord("D"));
-var key_jump = keyboard_check_pressed(vk_up) || keyboard_check_pressed(ord("W"));
+var key_jump = keyboard_check(vk_up) || keyboard_check(ord("W"));
 
 // Calculate movement
 var move = key_right - key_left;
@@ -22,6 +22,9 @@ if (place_meeting(x, y + 1, obj_wall)) {
 		draw_yscale = 1.5;
 		draw_xscale = .75*image_xscale;
 	}
+}
+with obj_airPlatform {
+	if x-100 < other.x and x+100 > other.x and other.y < y and other.y > y-400 other.verspeed -= 0.8;
 }
 
 // Horizontal Collisions

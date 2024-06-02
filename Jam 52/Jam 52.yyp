@@ -35,6 +35,8 @@
   },
   "name":"Jam 52",
   "resources":[
+    {"id":{"name":"obj_airParticle","path":"objects/obj_airParticle/obj_airParticle.yy",},},
+    {"id":{"name":"obj_airPlatform","path":"objects/obj_airPlatform/obj_airPlatform.yy",},},
     {"id":{"name":"obj_allEnemies","path":"objects/obj_allEnemies/obj_allEnemies.yy",},},
     {"id":{"name":"obj_allObjects","path":"objects/obj_allObjects/obj_allObjects.yy",},},
     {"id":{"name":"obj_bubble","path":"objects/obj_bubble/obj_bubble.yy",},},
@@ -81,6 +83,8 @@
     {"id":{"name":"snd_boss","path":"sounds/snd_boss/snd_boss.yy",},},
     {"id":{"name":"snd_dream","path":"sounds/snd_dream/snd_dream.yy",},},
     {"id":{"name":"snd_nightmare","path":"sounds/snd_nightmare/snd_nightmare.yy",},},
+    {"id":{"name":"spr_air","path":"sprites/spr_air/spr_air.yy",},},
+    {"id":{"name":"spr_airParticle","path":"sprites/spr_airParticle/spr_airParticle.yy",},},
     {"id":{"name":"spr_background","path":"sprites/spr_background/spr_background.yy",},},
     {"id":{"name":"spr_backgroundNightmare","path":"sprites/spr_backgroundNightmare/spr_backgroundNightmare.yy",},},
     {"id":{"name":"spr_bat","path":"sprites/spr_bat/spr_bat.yy",},},
