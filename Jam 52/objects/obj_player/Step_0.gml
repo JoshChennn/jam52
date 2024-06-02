@@ -50,12 +50,20 @@ y = y + verspeed;
 if (wall_collision(x,y+1) and !wall_collision(x,yprevious+1)) {
 	draw_yscale = .65; 
 	draw_xscale = 1.4*image_xscale;
+	repeat (20)  { 
+		var a = instance_create_layer(x+random_range(-20,20),y-5,"Instances",obj_groundParticle); 
+		a.direction = random(20)+choose(0,160);
+	}
 }
 
 // Setting animation and sprite direction
 
 if (move != 0 and wall_collision(x,y+3)) {
 	sprite_index = spr_playerWalking;
+	if irandom(2) == 0 {
+		var a = instance_create_layer(x+random_range(-20,20),y-5,"Instances",obj_groundParticle);
+		a.direction = random(20)+(image_xscale == 1 ? 160 : 0);
+	}
 }
 else {
 	sprite_index = spr_player;
