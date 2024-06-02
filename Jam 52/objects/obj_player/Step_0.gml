@@ -1,6 +1,10 @@
 /// @description Basic Mechanics
 if(keyboard_check(ord("R"))) { room_restart(); }
 
+// Lock in room/goto next
+x = clamp(x,10,room_width+100);
+if x > room_width + sprite_width/2 room_goto_next();
+
 // Get player input
 var key_left = keyboard_check(vk_left) || keyboard_check(ord("A"));
 var key_right = keyboard_check(vk_right) || keyboard_check(ord("D"));
