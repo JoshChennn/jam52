@@ -30,27 +30,27 @@ if (wall_collision(x, y + 1)) {
 with obj_airPlatform {
 	if x-100 < other.x and x+100 > other.x and other.y < y and other.y > y-400 other.verspeed -= 0.8;
 }
-
-// Horizontal Collisions
-if (wall_collision(x + horspeed, y)) {
-	while (!wall_collision(x + sign(horspeed), y)) {
-	    x = x + sign(horspeed);
+if !dead {
+	// Horizontal Collisions
+	if (wall_collision(x + horspeed, y)) {
+		while (!wall_collision(x + sign(horspeed), y)) {
+		    x = x + sign(horspeed);
+		}
+		horspeed = 0;
 	}
-	horspeed = 0;
-}
 
-x = x + horspeed;
+	x = x + horspeed;
 
-// Vertical Collisions
-if (wall_collision(x, y + verspeed)) {
-	while (!wall_collision(x, y + sign(verspeed))) {
-	    y = y + sign(verspeed);
+	// Vertical Collisions
+	if (wall_collision(x, y + verspeed)) {
+		while (!wall_collision(x, y + sign(verspeed))) {
+		    y = y + sign(verspeed);
+		}
+		verspeed = 0;
 	}
-	verspeed = 0;
+
+	y = y + verspeed;
 }
-
-y = y + verspeed;
-
 
 
 if horspeed == 0 {
@@ -62,12 +62,16 @@ else {
 	squash_y = 1;
 }
 
-var closest = 0;
+closest = 0;
 if obj_torch.dreamMode {
-	closest = instance_nearest(x,y-41,obj_wallDream);
+	with obj_wallDream {
+		if place_meeting(x,y,other) other.closest = id;
+	}
 }
 else {
-	closest = instance_nearest(x,y-41,obj_wall);
+	with obj_wall {
+		if place_meeting(x,y,other) other.closest = id;
+	}
 }
 if place_meeting(x,y,closest) {
 	if !position_meeting(x,y-41,closest) {
@@ -80,6 +84,7 @@ if place_meeting(x,y,closest) {
 		}
 	}
 	else {
+		show_message("I'm dead, I just don't do anything yet");
 		room_restart();
 	}
 }
@@ -120,4 +125,9 @@ draw_yscale = lerp(draw_yscale, squash_y, .09);
 
 if (flash > 0) flash--;
 
-if (hp <= 0) room_goto(0);
+if (hp <= 0) and !dead {
+	dead = true;
+	instance_destroy(obj_flamethrower);
+	repeat (40) { instance_create_layer(x,y-41,"Instances", obj_deadParticle); }
+	alarm_set(0,60);
+}

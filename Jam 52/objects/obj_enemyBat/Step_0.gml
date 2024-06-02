@@ -1,5 +1,6 @@
 // If bat dies, it falls to ground
 if (hp <= 0) {
+	if sprite_index != spr_deadBat repeat (15) { instance_create_layer(x,y,"Instances", obj_deadParticle); }
     sprite_index = spr_deadBat;
     if (!wall_collision(x, y + 1)) {
         y += 1;

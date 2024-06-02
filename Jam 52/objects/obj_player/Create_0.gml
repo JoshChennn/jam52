@@ -11,6 +11,9 @@ hp = 500;
 flash = 0;
 squash_x =  1;
 squash_y = 1;
+closest = 0;
+
+dead = false;
 
 draw_xscale = 1;
 draw_yscale = 1;
