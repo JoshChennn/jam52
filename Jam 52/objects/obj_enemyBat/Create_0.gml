@@ -16,7 +16,7 @@ start_loc_y = y;
 attacking_player = false;
 attacking_multipier = 1;
 
-detection_range = 1000;
+detection_range = 400;
 
 direction_index = random_range(0,4);
 directions = [0, 144, 288, 72, 216];
