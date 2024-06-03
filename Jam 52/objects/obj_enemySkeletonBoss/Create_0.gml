@@ -1,7 +1,7 @@
 /// @description Variables 
 
 walkspeed = 2; 
-hp = 500;
+hp = 375;
 jump_strength = 22;
 grvty = 0.5;
 flash = 0;

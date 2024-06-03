@@ -145,3 +145,5 @@ if (instance_exists(obj_torch)) {
 	if x < obj_player.x image_xscale = 1;
 	else image_xscale = -1;
 }
+
+if (place_meeting(x,y,obj_spikes) or place_meeting(x,y,obj_spikesDream)) instance_destroy();
