@@ -31,7 +31,7 @@ if (wall_collision(x, y + 1)) {
 	}
 }
 with obj_airPlatform {
-	if x-100 < other.x and x+100 > other.x and other.y < y and other.y > y-500 other.verspeed -= 0.6;
+	if x-100 < other.x and x+100 > other.x and other.y < y and other.y > y-400 other.verspeed -= 0.8;
 }
 if !dead {
 	// Horizontal Collisions
