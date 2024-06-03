@@ -6,3 +6,4 @@ follow = obj_player;
 timer = 0;
 done = false;
 target = noone;
+shake = 0;

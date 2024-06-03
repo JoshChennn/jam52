@@ -5,6 +5,8 @@ y = clamp(y,540,room_height-540);
 
 camera_set_view_pos(view_camera[0],x-960+random_range(-shake,shake),y-540+random_range(-shake,shake));
 
+shake *= 0.9;
+
 switch (room) {
 	case rm_bossBat:
 		target = obj_enemyBatBoss;
