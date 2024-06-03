@@ -10,7 +10,7 @@ if (hp <= 0) {
 // Get the distance to the player
 var distance_to_player = point_distance(x, y, obj_player.x, obj_player.y);
 
-if (distance_to_player <= detection_range / 4 && cooldown < 0) {
+if (distance_to_player <= detection_range / 4 && cooldown < 0 && !obj_torch.dreamMode) {
     if (buildup == 100) {
         dir_x = (obj_player.x - x);
         dir_y = (obj_player.y - y);
@@ -31,7 +31,7 @@ if (distance_to_player <= detection_range / 4 && cooldown < 0) {
         }
     }
     buildup++;
-} else if (distance_to_player <= detection_range) {
+} else if (distance_to_player <= detection_range  && !obj_torch.dreamMode) {
     // Get the direction towards the player
     dir_x = (obj_player.x - x);
     dir_y = (obj_player.y - y);

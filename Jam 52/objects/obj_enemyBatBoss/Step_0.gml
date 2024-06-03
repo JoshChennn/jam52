@@ -17,7 +17,7 @@ function has_line_of_sight(bat_x, bat_y, player_x, player_y) {
 
 var distance_to_player = point_distance(x, y, obj_player.x, obj_player.y);
 
-if (distance_to_player < detection_range / 2 && has_line_of_sight(x, y, obj_player.x, obj_player.y)) {
+if (distance_to_player < detection_range / 2 && has_line_of_sight(x, y, obj_player.x, obj_player.y) && !obj_torch.dreamMode) {
     show_debug_message("I see you");
 	
 	if (attacking_multipier < 3) {
@@ -74,7 +74,7 @@ if (distance_to_player < detection_range / 2 && has_line_of_sight(x, y, obj_play
 	    }
 	}
 	
-} else if (distance_to_player < detection_range) {
+} else if (distance_to_player < detection_range &&  !obj_torch.dreamMode) {
 	if (attacking_multipier > 1) { attacking_multipier -= 0.05; }
 
     // find player direction
@@ -122,7 +122,7 @@ if (increment <= 0) {
 }
 
 // If the player is not within detection range
-if (distance_to_player > detection_range) {
+if (distance_to_player > detection_range || obj_torch.dreamMode) {
 	if (attacking_multipier > 1) { attacking_multipier -= 0.05; }
 	
     var angle = directions[direction_index];

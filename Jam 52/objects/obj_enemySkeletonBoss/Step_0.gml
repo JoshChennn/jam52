@@ -14,28 +14,55 @@ if (hp <= 0) {
 
 var distance_to_player = point_distance(x, y, obj_player.x, obj_player.y);
 
-if (distance_to_player < detection_range) {
-	if (obj_player.x - x) {
-		horspeed = 2;
-		
-		// avoid jumping off cliffs
-		if (!wall_collision(x + 50, y + 500)) {
-			horspeed = 0;
-		}
-		// if there is a barrier, jump
-		if (wall_collision(x + 40, y) && !wall_collision(x + 40, y - 150)) {
-			should_jump = true;
-		}
-	} else { 
-		horspeed = -2;
-		
-		if (!wall_collision(x - 50, y + 150)) {
-			horspeed = 0;
-		}
-		if(wall_collision(x - 40, y) && !wall_collision(x - 40, y - 150)) {
-			should_jump = true;
-		}
+if (distance_to_player < detection_range && !obj_torch.dreamMode) {
+    if (obj_player.x - x > 0) {
+        horspeed = 2;
+        
+        // avoid jumping off cliffs
+        if (!wall_collision(x + 50, y + 200)) {
+            horspeed = 0;
+        }
+        // if there is a barrier, jump
+        if (wall_collision(x + 40, y) && !wall_collision(x + 40, y - 150)) {
+            should_jump = true;
+        }
+    } else { 
+        horspeed = -2;
+        
+        if (!wall_collision(x - 50, y + 200)) {
+            horspeed = 0;
+        }
+        if (wall_collision(x - 40, y) && !wall_collision(x - 40, y - 150)) {
+            should_jump = true;
+        }
+    }
+} else {
+    if (move_time <= 0) {
+        move_direction = choose(-1, 1); 
+        move_time = irandom_range(40, 120);
+    }
+	
+	if (move_direction > 0) {
+		// avoid cliffs
+	    if (!wall_collision(x + 50, y + 200)) {
+            horspeed = 0;
+        }
+        // if there is a barrier, jump
+        if (wall_collision(x + 40, y) && !wall_collision(x + 40, y - 150)) {
+            should_jump = true;
+        }
+	} else {
+		if (!wall_collision(x - 50, y + 200)) {
+            horspeed = 0;
+        }
+        if (wall_collision(x - 40, y) && !wall_collision(x - 40, y - 150)) {
+            should_jump = true;
+        }
 	}
+	
+    horspeed = 2 * move_direction;
+
+    move_time--;
 }
 
 if (distance_to_player < throw_range) {
@@ -46,11 +73,20 @@ if (!my_spear) spear_in_hand = false;
 
 if (spear_in_hand) {
     // Update spear direction and position to follow the player
-    my_spear.image_angle = point_direction(x, y, obj_player.x, obj_player.y);
+	if(!obj_torch.dreamMode) {
+	    my_spear.image_angle = point_direction(x, y, obj_player.x, obj_player.y);
+	} else {
+		if (move_direction > 0) {
+			my_spear.image_angle = 0;
+		} else { my_spear.image_angle = 180; }
+	}
     my_spear.x = x;
     my_spear.y = y - 10;
 	
 	if (spear_throw_cooldown <= -40) {
+		if (obj_torch.dreamMode) {
+			should_throw = false;
+		}
         if (should_throw) {
             spear_throw_cooldown = random_range(10, spear_throw_interval); // Reset cooldown
 

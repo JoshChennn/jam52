@@ -9,6 +9,9 @@ verspeed = 0;
 horspeed = 0;
 jump_cooldown = 20;
 should_jump = false;
+random_timer = 100;
+move_direction = 0;
+move_time = 0; 
 
 image_xscale = 0.5;
 image_yscale = 0.5;
