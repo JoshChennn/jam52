@@ -1,6 +1,6 @@
 /// @description Initialization
 
-hp = 400; 
+hp = 300; 
 flash = 0; 
 move_speed = 1.8; 
 horspeed = 0;
