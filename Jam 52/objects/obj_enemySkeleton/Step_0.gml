@@ -139,3 +139,9 @@ jump_cooldown --;
 flash--;
 verspeed += grvty;
 
+if (instance_exists(obj_torch)) {
+	if obj_torch.dreamMode sprite_index = spr_npc;
+	else sprite_index = spr_skeleton;
+	if x < obj_player.x image_xscale = 1;
+	else image_xscale = -1;
+}

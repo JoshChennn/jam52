@@ -3,3 +3,5 @@ else if place_meeting(x,y,obj_wallDream) start_mode = 1;
 else start_mode = 2;
 startY = y;
 moving = false;
+
+depth = 250;
