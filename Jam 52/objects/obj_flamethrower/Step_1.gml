@@ -11,26 +11,13 @@ else image_yscale = 1;
 if (obj_torch.dreamMode) {
 	if mouse_check_button(mb_left) {
 		if irandom(1) == 1 instance_create_depth(x+lengthdir_x(28,image_angle),y+lengthdir_y(28,image_angle),depth+1,obj_bubble);
+		obj_camera.shake = 2;
 	}
 }
 else {
 	if (mouse_check_button(mb_left)) {
 		instance_create_depth(x+lengthdir_x(25,image_angle),y+lengthdir_y(25,image_angle),depth+1,obj_flame);
-			
-		// Screen shake for flamethrower
-		/*if (keepX == -1) {
-			keepX = obj_camera.x;
-			keepY = obj_camera.y;
-		}
-		var shakeX = random_range(-4,4);
-		var shakeY = random_range(-4,4);
-		obj_camera.x += shakeX + keepX;
-		obj_camera.y += shakeY + keepY;
-	}
-	else {
-		keepX = -1;	
-	}*/
-		
+		obj_camera.shake = 4.5;
 	}
 }
 
