@@ -1,7 +1,9 @@
 {
   "$GMObject":"",
   "%Name":"obj_allEnemies",
-  "eventList":[],
+  "eventList":[
+    {"$GMEvent":"","%Name":"","collisionObjectId":{"name":"obj_flame","path":"objects/obj_flame/obj_flame.yy",},"eventNum":0,"eventType":4,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
+  ],
   "managed":true,
   "name":"obj_allEnemies",
   "overriddenProperties":[],
