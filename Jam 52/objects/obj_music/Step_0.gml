@@ -6,8 +6,8 @@ switch (room) {
 	case rm_level3:
 		room_sound = snd_nightmare;
 		break;
-	case rm_bossBat:
 	case rm_bossGhost:
+	case rm_bossBat:
 	case rm_bossSkeleton:
 		room_sound = snd_boss;
 		break;

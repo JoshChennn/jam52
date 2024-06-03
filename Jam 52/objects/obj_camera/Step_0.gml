@@ -4,10 +4,3 @@ y += (obj_player.y - y) / 25;
 y = clamp(y,540,room_height-540);
 
 camera_set_view_pos(view_camera[0],x-960,y-540);
-
-if (room = rm_bossBat && timer < 20) {
-	x = obj_enemyBatBoss.x;
-	y = obj_enemyBatBoss.y;
-}
-
-timer ++;

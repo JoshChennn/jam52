@@ -9,6 +9,9 @@ verspeed = 0;
 horspeed = 0;
 jump_cooldown = 20;
 should_jump = false;
+random_timer = 100;
+move_direction = 0;
+move_time = 0; 
 
 my_spear = noone;
 spear_throw_cooldown = 0;
