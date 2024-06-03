@@ -90,6 +90,8 @@
     {"id":{"name":"scr_astar_path","path":"scripts/scr_astar_path/scr_astar_path.yy",},},
     {"id":{"name":"scr_dream","path":"scripts/scr_dream/scr_dream.yy",},},
     {"id":{"name":"scr_spear_path","path":"scripts/scr_spear_path/scr_spear_path.yy",},},
+    {"id":{"name":"scr_surfaceLayer","path":"scripts/scr_surfaceLayer/scr_surfaceLayer.yy",},},
+    {"id":{"name":"scr_surfaceLayerEnd","path":"scripts/scr_surfaceLayerEnd/scr_surfaceLayerEnd.yy",},},
     {"id":{"name":"scr_surfaces","path":"scripts/scr_surfaces/scr_surfaces.yy",},},
     {"id":{"name":"wall_collide","path":"scripts/wall_collide/wall_collide.yy",},},
     {"id":{"name":"shRed","path":"shaders/shRed/shRed.yy",},},
