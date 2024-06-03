@@ -5,8 +5,8 @@ flash = 0;
 move_speed = 1.8; 
 horspeed = 0;
 verspeed = 0;
-image_xscale = 0.7;
-image_yscale = 0.7;
+image_xscale = 0.35;
+image_yscale = 0.35;
 
 hit_cooldown = 0;
 
