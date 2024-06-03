@@ -1,7 +1,7 @@
 /// @description Variables 
 
 move_speed = 1; 
-hp = 200;
+hp = 500;
 flash = 0; 
 detection_range = 2000;
 
