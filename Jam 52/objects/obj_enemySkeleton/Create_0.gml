@@ -1,7 +1,7 @@
 /// @description Variables 
 
 walkspeed = 2; 
-hp = 50;
+hp = 20;
 jump_strength = 10;
 grvty = 0.5;
 flash = 0;
@@ -12,6 +12,7 @@ should_jump = false;
 random_timer = 100;
 move_direction = 0;
 move_time = 0; 
+damage = 10;
 
 my_spear = noone;
 spear_throw_cooldown = 0;
@@ -59,8 +60,8 @@ function throw_strength(how_far_to_player, what_angle) {
     } else if (what_angle < 120) {
         to_throw = false;
     } else if (what_angle < 160) {
-        to_angle = 115;
-        to_strength *= 1.5;
+        to_angle = 105;
+        to_strength *= 1.3;
     } else if (what_angle < 180) {
         to_angle = 120;
     } else if (what_angle < 220) {
