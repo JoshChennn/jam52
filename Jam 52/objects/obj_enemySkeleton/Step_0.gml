@@ -6,11 +6,9 @@ if (hp <= 0) {
 		var a = instance_create_layer(x,y,"Instances", obj_deadParticle);
 		a.image_blend = $BBBBBB
 	}
-    if (my_spear != noone) {
         if (spear_in_hand) {
             instance_destroy(my_spear); 
         }
-    }
     instance_destroy();
 }
 
@@ -21,7 +19,7 @@ if (distance_to_player < detection_range && !obj_torch.dreamMode) {
         horspeed = 2;
         
         // avoid jumping off cliffs
-        if (!wall_collision(x + 50, y + 50)) {
+        if (!wall_collision(x + 30, y + 50)) {
             horspeed = 0;
         }
         // if there is a barrier, jump
@@ -31,7 +29,7 @@ if (distance_to_player < detection_range && !obj_torch.dreamMode) {
     } else { 
         horspeed = -2;
         
-        if (!wall_collision(x - 50, y + 50)) {
+        if (!wall_collision(x - 30, y + 50)) {
             horspeed = 0;
         }
         if (wall_collision(x - 40, y) && !wall_collision(x - 40, y - 150)) {
@@ -46,16 +44,18 @@ if (distance_to_player < detection_range && !obj_torch.dreamMode) {
 	
 	if (move_direction > 0) {
 		// avoid cliffs
-	    if (!wall_collision(x + 50, y + 50)) {
+	    if (!wall_collision(x + 30, y + 50)) {
             horspeed = 0;
+			move_direction = 0;
         }
         // if there is a barrier, jump
         if (wall_collision(x + 40, y) && !wall_collision(x + 40, y - 75)) {
             should_jump = true;
         }
 	} else {
-		if (!wall_collision(x - 50, y + 50)) {
+		if (!wall_collision(x - 30, y + 50)) {
             horspeed = 0;
+			move_direction = 0;
         }
         if (wall_collision(x - 40, y) && !wall_collision(x - 40, y - 75)) {
             should_jump = true;
@@ -73,17 +73,12 @@ if (distance_to_player < throw_range) {
 
 if (!my_spear) spear_in_hand = false;
 
-if (spear_in_hand) {
+if (spear_in_hand && hp > 1) {
     // Update spear direction and position to follow the player
-	if(!obj_torch.dreamMode) {
-	    my_spear.image_angle = point_direction(x, y, obj_player.x, obj_player.y);
-	} else {
-		if (move_direction > 0) {
-			my_spear.image_angle = 0;
-		} else { my_spear.image_angle = 180; }
-	}
-    my_spear.x = x;
-    my_spear.y = y - 10;
+	try {
+	    my_spear.x = x;
+	    my_spear.y = y - 10;
+	} 
 	
 	if (spear_throw_cooldown <= -40) {
 		if (obj_torch.dreamMode) {
