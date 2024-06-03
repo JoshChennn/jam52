@@ -173,7 +173,6 @@
   "RoomOrderNodes":[
     {"roomId":{"name":"rm_tutorial","path":"rooms/rm_tutorial/rm_tutorial.yy",},},
     {"roomId":{"name":"rm_level1","path":"rooms/rm_level1/rm_level1.yy",},},
-    {"roomId":{"name":"rm_level1_","path":"rooms/rm_level1_/rm_level1_.yy",},},
     {"roomId":{"name":"rm_level2_","path":"rooms/rm_level2_/rm_level2_.yy",},},
     {"roomId":{"name":"rm_bossBat","path":"rooms/rm_bossBat/rm_bossBat.yy",},},
     {"roomId":{"name":"rm_level3_","path":"rooms/rm_level3_/rm_level3_.yy",},},
@@ -183,6 +182,7 @@
     {"roomId":{"name":"rm_thanks","path":"rooms/rm_thanks/rm_thanks.yy",},},
     {"roomId":{"name":"rm_level3","path":"rooms/rm_level3/rm_level3.yy",},},
     {"roomId":{"name":"rm_level4","path":"rooms/rm_level4/rm_level4.yy",},},
+    {"roomId":{"name":"rm_level1_","path":"rooms/rm_level1_/rm_level1_.yy",},},
     {"roomId":{"name":"rm_level2","path":"rooms/rm_level2/rm_level2.yy",},},
   ],
   "templateType":"game",
