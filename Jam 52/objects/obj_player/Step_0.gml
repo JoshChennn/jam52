@@ -125,7 +125,9 @@ else if (horspeed < 0) {
 draw_xscale = lerp(draw_xscale, image_xscale*squash_x, .09);
 draw_yscale = lerp(draw_yscale, squash_y, .09);
 
-if (flash > 0) flash--;
+if (flash > 0) { 
+	flash--;
+} 
 
 if (hp <= 0) and !dead {
 	dead = true;

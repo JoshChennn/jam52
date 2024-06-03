@@ -5,6 +5,7 @@ image_xscale = 0.1;
 image_yscale = image_xscale;
 
 gun_range = 35;
+audio_play_sound(snd_flame, 1, false);
 
 // Set colour
 /*var col = irandom_range(0,10);
