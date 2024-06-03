@@ -19,7 +19,7 @@ switch (room) {
 if (target != noone and timer > 60) {
 	if (follow == obj_player and !done) {
 		follow = target;
-		timer = 0;
+		timer = -30;
 	}
 	else {
 		follow = obj_player;
