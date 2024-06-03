@@ -6,3 +6,4 @@ image_xscale = origin_scale + wobble;
 image_yscale = origin_scale - wobble;
 
 wobble_speed *= 0.99;
+direction += angle_difference(90,direction)/80;

@@ -87,8 +87,7 @@ if closest != -1 and place_meeting(x,y,closest) {
 		}
 	}
 	else {
-		//show_message("I'm dead, I just don't do anything yet");
-		room_restart();
+		obj_torch.dreamMode = !obj_torch.dreamMode;
 	}
 }
 
