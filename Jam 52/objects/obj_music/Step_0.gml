@@ -1,6 +1,5 @@
 switch (room) {
 	case rm_tutorial:
-	case rm_testLevel:
 	case rm_level1_:
 	case rm_level2_:
 	case rm_level3_:
