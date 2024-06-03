@@ -1,4 +1,12 @@
 // If bat dies, it falls to ground
+
+if (wall_collision(x, y)) {
+	hitting_wall += 1;
+	if (hitting_wall > 240) hp = 0;
+} else {
+	hitting_wall = 0;
+}
+
 if (hp <= 0) {
 	repeat (15) { 
 		var a = instance_create_layer(x,y,"Instances", obj_deadParticle);

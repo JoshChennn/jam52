@@ -1,0 +1,1 @@
+audio_play_sound(snd_enemy_hit, 1, false);
