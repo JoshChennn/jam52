@@ -1,8 +1,8 @@
 /// @description Variables 
 
 walkspeed = 2; 
-hp = 50;
-jump_strength = 15;
+hp = 500;
+jump_strength = 22;
 grvty = 0.5;
 flash = 0;
 verspeed = 0;
@@ -12,6 +12,7 @@ should_jump = false;
 random_timer = 100;
 move_direction = 0;
 move_time = 0; 
+damage = 50;
 
 image_xscale = 0.5;
 image_yscale = 0.5;
@@ -62,8 +63,8 @@ function throw_strength(how_far_to_player, what_angle) {
     } else if (what_angle < 120) {
         to_throw = false;
     } else if (what_angle < 160) {
-        to_angle = 115;
-        to_strength *= 1.5;
+        to_angle = 105;
+        to_strength *= 1.3;
     } else if (what_angle < 180) {
         to_angle = 120;
     } else if (what_angle < 220) {

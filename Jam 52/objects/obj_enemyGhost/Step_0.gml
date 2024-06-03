@@ -22,6 +22,7 @@ if (distance_to_player <= detection_range / 4 && cooldown < 0 && !obj_torch.drea
             dir_y /= length;
         }
     } else if (buildup > 100) {
+
         x += dir_x * move_speed * 4;
         y += dir_y * move_speed * 4;
 

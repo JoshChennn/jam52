@@ -10,15 +10,15 @@ if (!shoot) {
 }
 
 // Check for collision with the player
-if (place_meeting(x, y, obj_player)) {
-	if (cooldown < 0) {
+if (place_meeting(x, y, obj_player) && !obj_torch.dreamMode) {
 	    with (obj_player) {
 	        hp -= other.damage;
 	        flash = 3;
-			cooldown = 120;
+			cooldown = 60;
+			show_debug_message(hp);
 	    }
-	}
-}
+} 
+
 cooldown --;
 // Check for collision with walls
 if (wall_collision(x, y) && !place_meeting(x, y, obj_enemySkeleton)) {

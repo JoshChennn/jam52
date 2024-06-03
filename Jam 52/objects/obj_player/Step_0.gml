@@ -4,7 +4,7 @@ if(keyboard_check(ord("R"))) { room_restart(); }
 // Lock in room/goto next
 x = clamp(x,10,room_width+100);
 if x > room_width + sprite_width/2 {
-	obj_transition.target_room = room_next(room);
+	obj_transition.moving_on = true;
 	obj_transition.fade_rate = 0.02;
 }
 
@@ -31,7 +31,7 @@ if (wall_collision(x, y + 1)) {
 	}
 }
 with obj_airPlatform {
-	if x-100 < other.x and x+100 > other.x and other.y < y and other.y > y-500 other.verspeed -= 0.6;
+	if x-100 < other.x and x+100 > other.x and other.y < y and other.y > y-400 other.verspeed -= 0.8;
 }
 if !dead {
 	// Horizontal Collisions

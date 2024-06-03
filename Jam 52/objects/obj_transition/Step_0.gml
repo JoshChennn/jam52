@@ -8,6 +8,7 @@ if fade_rate < 0 and image_alpha <= 0 {
 if fade_rate > 0 and image_alpha >= 1 {
 	fade_rate *= -1;
 	image_alpha = 1;
-	if room == target_room room_restart();
-	else room = target_room;
+	if moving_on room_goto_next();
+	else room_restart();
+	moving_on = false;
 }
