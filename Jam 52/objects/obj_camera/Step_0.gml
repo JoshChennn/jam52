@@ -13,7 +13,7 @@ switch (room) {
 		break;
 	case rm_bossGhost:
 		target = obj_enemyGhostBoss;
-		break;
+		break; 
 	case rm_bossSkeleton:
 		target = obj_enemySkeletonBoss;
 		break;

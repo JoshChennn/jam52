@@ -5,8 +5,8 @@ if (hp <= 0) {
 		a.image_blend = $BBBBBB
 	}
     if (spear_in_hand) {
-            instance_destroy(my_spear); 
-        }
+        instance_destroy(my_spear); 
+    }
     instance_destroy();
 }
 
@@ -71,7 +71,7 @@ if (distance_to_player < throw_range) {
 
 if (!my_spear) spear_in_hand = false;
 
-if (spear_in_hand) {
+if (spear_in_hand && hp > 1) {
     // Update spear direction and position to follow the player
 	try {
 	    my_spear.x = x;

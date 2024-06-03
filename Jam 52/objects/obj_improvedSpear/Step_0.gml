@@ -19,6 +19,10 @@ if (place_meeting(x, y, obj_player) && !obj_torch.dreamMode) {
 	    }
 } 
 
+if (!place_meeting(x,y,obj_enemySkeleton) && speed == 0) {
+	y += 1;
+}
+
 cooldown --;
 // Check for collision with walls
 if (wall_collision(x, y) && !place_meeting(x, y, obj_enemySkeleton)) {

@@ -13,8 +13,10 @@ squash_x =  1;
 squash_y = 1;
 closest = 0;
 
-if (room == rm_bossBat || room == rm_bossGhost || room == rm_bossSkeleton) {
+if (room == rm_bossBat || room == rm_bossGhost) {
 	hp = 250;
+} else if (room == rm_bossSkeleton) {
+	hp = 500;
 }
 
 dead = false;

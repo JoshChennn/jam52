@@ -11,7 +11,7 @@ if x > room_width + sprite_width/2 {
 // Get player input
 var key_left = keyboard_check(vk_left) || keyboard_check(ord("A"));
 var key_right = keyboard_check(vk_right) || keyboard_check(ord("D"));
-var key_jump = keyboard_check_pressed(vk_up) || keyboard_check_pressed(ord("W"));
+var key_jump = keyboard_check_pressed(vk_up) || keyboard_check_pressed(ord("W")) || keyboard_check_pressed(vk_space);
 
 // Calculate movement
 var move = key_right - key_left;
