@@ -1,12 +1,10 @@
 // If bat dies, it falls to ground
 if (hp <= 0) {
-    sprite_index = spr_deadBat;
-    if (!wall_collision(x, y + 1)) {
-        y += 1;
-    }
-    return;
-} else {
-    sprite_index = spr_batBoss; 
+    repeat (40) { 
+		var a = instance_create_layer(x,y,"Instances", obj_deadParticle);
+		a.image_blend = $353535
+	}
+    instance_destroy();
 }
 
 function has_line_of_sight(bat_x, bat_y, player_x, player_y) {

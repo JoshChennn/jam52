@@ -1,11 +1,10 @@
 // If dead, float up
 if (hp <= 0) {
-    sprite_index = spr_deadGhost;
-    y -= 1;
-    image_alpha = 0.5;
-    return;
-} else {
-    sprite_index = spr_ghostBoss;
+    repeat (50) {
+		var a = instance_create_layer(x,y,"Instances", obj_deadParticle);
+		a.image_blend = $BBBBBB
+	}
+    instance_destroy();
 }
 
 // Get the distance to the player

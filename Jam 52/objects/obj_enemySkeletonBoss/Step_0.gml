@@ -1,18 +1,15 @@
 // If dead
 if (hp <= 0) {
-    sprite_index = spr_deadSkeleton;
-    image_alpha = 0.5; 
+    repeat (60) {
+		var a = instance_create_layer(x,y,"Instances", obj_deadParticle);
+		a.image_blend = $BBBBBB
+	}
     if (my_spear != noone) {
         if (spear_in_hand) {
             instance_destroy(my_spear); 
         }
     }
-    while (!wall_collision(x, y + 1)) {
-        y += 1; 
-    }
-    return;
-} else {
-    sprite_index = spr_skeletonBoss; // Set to the alive skeleton sprite
+    instance_destroy();
 }
 
 var distance_to_player = point_distance(x, y, obj_player.x, obj_player.y);
