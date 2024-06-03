@@ -72,7 +72,7 @@ if (dir_x > 0) {
 }
 
 if (invisble_timer < 0) {
-	image_alpha = 0.1;
+	image_alpha = 0.01;
 	move_speed = 3;
 	if (invisble_timer < -120) {
 		move_speed = 2;

@@ -1,9 +1,9 @@
 /// @description Variables 
 
-move_speed = 1; 
+move_speed = 0.5; 
 hp = 500;
 flash = 0; 
-detection_range = 2000;
+detection_range = 4000;
 
 increment = -1;
 dir_x = random_range(-5, 5);
