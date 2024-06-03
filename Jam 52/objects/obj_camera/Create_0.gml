@@ -1,4 +1,8 @@
 x = 960;
-y = 540;
+y = obj_player.y;
+
+follow = obj_player;
 
 timer = 0;
+done = false;
+target = noone;
