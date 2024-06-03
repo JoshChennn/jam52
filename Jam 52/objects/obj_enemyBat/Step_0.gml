@@ -2,7 +2,7 @@
 if (hp <= 0) {
 	repeat (15) { 
 		var a = instance_create_layer(x,y,"Instances", obj_deadParticle);
-		//a.image_blend =
+		a.image_blend = $353535
 	}
     instance_destroy();
 }

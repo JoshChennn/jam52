@@ -132,5 +132,8 @@ if (hp <= 0) and !dead {
 	dead = true;
 	obj_transition.fade_rate = 0.02;
 	instance_destroy(obj_flamethrower);
-	repeat (40) { instance_create_layer(x,y-41,"Instances", obj_deadParticle); }
+	repeat (40) { 
+		var a = instance_create_layer(x,y-41,"Instances", obj_deadParticle);
+		a.image_blend = c_red;
+	}
 }

@@ -11,13 +11,13 @@ else image_yscale = 1;
 if (obj_torch.dreamMode) {
 	if mouse_check_button(mb_left) {
 		if irandom(1) == 1 instance_create_depth(x+lengthdir_x(28,image_angle),y+lengthdir_y(28,image_angle),depth+1,obj_bubble);
-		obj_camera.shake = 2;
+		obj_camera.shake = 1;
 	}
 }
 else {
 	if (mouse_check_button(mb_left)) {
 		instance_create_depth(x+lengthdir_x(25,image_angle),y+lengthdir_y(25,image_angle),depth+1,obj_flame);
-		obj_camera.shake = 4.5;
+		obj_camera.shake = 3.5;
 	}
 }
 
