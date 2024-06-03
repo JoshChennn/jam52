@@ -103,7 +103,7 @@ if (spear_in_hand && hp > 1) {
         }
 	}
 } else {
-	if (spear_throw_cooldown <= 0) {
+	if (spear_throw_cooldown <= 0 && !obj_torch.dreamMode) {
 		my_spear = instance_create_depth(x, y, depth - 1, obj_improvedSpear);
 		spear_in_hand = true;
 	}
