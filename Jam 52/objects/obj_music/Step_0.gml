@@ -21,7 +21,7 @@ if (instance_exists(obj_torch)) {
 		audio_sound_gain(room_sound,0,1200);
 	}
 	if (!obj_torch.dreamMode) {
-		if (!audio_is_playing(room_sound)) audio_play_sound(room_sound,10,true);
+		//if (!audio_is_playing(room_sound)) audio_play_sound(room_sound,10,true);
 		audio_sound_gain(snd_dream,0,1200);
 		audio_sound_gain(room_sound,1,1200);
 	}
