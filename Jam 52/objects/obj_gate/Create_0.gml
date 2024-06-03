@@ -4,4 +4,4 @@ else start_mode = 2;
 startY = y;
 moving = false;
 
-depth = 250;
+depth = 300;

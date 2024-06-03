@@ -9,3 +9,5 @@ if (instance_exists(obj_torch)) {
 }
 
 flash = clamp(flash-0.02,0,1);
+if flash != 0 depth = obj_wallDream.depth-200;
+else depth = old_depth;
