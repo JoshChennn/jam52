@@ -87,7 +87,7 @@ if place_meeting(x,y,closest) {
 		}
 	}
 	else {
-		show_message("I'm dead, I just don't do anything yet");
+		//show_message("I'm dead, I just don't do anything yet");
 		room_restart();
 	}
 }

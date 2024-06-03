@@ -6,8 +6,8 @@ wobble = 0;
 wobble_speed = random_range(0.5,1.2)/100;
 
 var dir = irandom_range(-5,5);
-direction = 90+dir;
-speed = random_range(2,4);
+direction = obj_flamethrower.image_angle + dir;
+speed = random_range(3,7);
 
-var destroy = random_range(30,120);
+var destroy = random_range(30,90);
 alarm_set(0, destroy);
