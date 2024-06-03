@@ -37,6 +37,7 @@
   },
   "name":"Jam 52",
   "resources":[
+    {"id":{"name":"obj_airParticle","path":"objects/obj_airParticle/obj_airParticle.yy",},},
     {"id":{"name":"obj_airPlatform","path":"objects/obj_airPlatform/obj_airPlatform.yy",},},
     {"id":{"name":"obj_allEnemies","path":"objects/obj_allEnemies/obj_allEnemies.yy",},},
     {"id":{"name":"obj_allObjects","path":"objects/obj_allObjects/obj_allObjects.yy",},},
