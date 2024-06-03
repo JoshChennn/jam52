@@ -1,2 +1,2 @@
-image_angle -= 0.01;
-if image_angle <= 0 instance_destroy();
+image_alpha -= 0.01;
+if image_alpha <= 0 instance_destroy();
