@@ -1,6 +1,6 @@
 /// @description Insert description here
 
-image_xscale = random_range(0.1, 0.4);
+image_xscale = random_range(0.4, 1.5);
 image_yscale = image_xscale;
 image_alpha = random_range(0.2, 0.5);
 
