@@ -6,4 +6,7 @@ with (other) {
 	flash = 3;
 }
 
+if (!object_exists(obj_flame)) {
+	audio_stop_sound(snd_flame);
+}
 instance_destroy();
