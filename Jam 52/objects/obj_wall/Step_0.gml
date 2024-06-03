@@ -7,3 +7,5 @@ if (instance_exists(obj_torch)) {
 		sprite_index = noone;
 	}
 }
+
+flash = clamp(flash-0.02,0,1);
