@@ -6,7 +6,8 @@ y = obj_player.y - 31;
 // New flamethrower
 if (obj_torch.dreamMode) {
 	if mouse_check_button(mb_left) {
-		if irandom(1) == 1 instance_create_depth(x+lengthdir_x(28,image_angle),y+lengthdir_y(28,image_angle),depth+1,obj_bubble);
+		direction = point_direction(x,y,mouse_x,mouse_y);
+		if irandom(1) == 1 instance_create_depth(x+lengthdir_x(28,direction),y+lengthdir_y(28,direction),depth+1,obj_bubble);
 		//obj_camera.shake = 1;
 	}
 	sprite_index = spr_bubbleBlower;
