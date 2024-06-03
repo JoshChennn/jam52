@@ -19,6 +19,8 @@ if (room == rm_bossBat || room == rm_bossGhost) {
 	hp = 500;
 }
 
+if room != rm_tutorial and !instance_exists(obj_torchBar) instance_create_depth(x,y,-1000,obj_torchBar);
+
 dead = false;
 
 draw_xscale = 1;
