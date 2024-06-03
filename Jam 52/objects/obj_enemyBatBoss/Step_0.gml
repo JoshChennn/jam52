@@ -1,3 +1,7 @@
+// Clamp in room
+x = clamp(x,250,room_width-250);
+y = clamp(y,250,room_height-250);
+
 // If bat dies, it falls to ground
 if (hp <= 0) {
     repeat (40) { 

@@ -1,3 +1,3 @@
 if (!obj_torch.dreamMode) {
-	audio_play_sound(snd_player_hit, 1, false);
+	//if !audio_is_playing(snd_player_hit) audio_play_sound(snd_player_hit, 1, false);
 }

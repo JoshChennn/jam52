@@ -1,3 +1,6 @@
+x = clamp(x,200,room_width-200);
+y = clamp(y,200,room_height-200);
+
 // If bat dies, it falls to ground
 
 if (wall_collision(x, y)) {

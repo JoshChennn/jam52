@@ -17,7 +17,7 @@ else {
 		just_hit = 0;
 		instance_create_depth(x+lengthdir_x(25,image_angle),y+lengthdir_y(25,image_angle),depth+1,obj_flame);
 		obj_camera.shake = 3.5;
-		audio_play_sound(snd_flame, 1, false);
+		//if !audio_is_playing(snd_flame) audio_play_sound(snd_flame, 1, false);
 	} else if (just_hit > 40) { audio_stop_sound(snd_flame); }
 	sprite_index = spr_flamethrower;
 	image_angle = point_direction(x, y, mouse_x, mouse_y);

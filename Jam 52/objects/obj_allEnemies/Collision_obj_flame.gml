@@ -1,1 +1,1 @@
-audio_play_sound(snd_enemy_hit, 1, false);
+//if !audio_is_playing(snd_enemy_hit) audio_play_sound(snd_enemy_hit, 1, false, 0.3);
