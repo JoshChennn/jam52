@@ -4,7 +4,7 @@ if(keyboard_check(ord("R"))) { room_restart(); }
 // Lock in room/goto next
 x = clamp(x,10,room_width+100);
 if x > room_width + sprite_width/2 {
-	obj_transition.target_room = room_next(room);
+	obj_transition.moving_on = true;
 	obj_transition.fade_rate = 0.02;
 }
 
