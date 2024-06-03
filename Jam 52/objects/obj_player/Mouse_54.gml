@@ -20,4 +20,4 @@ else if (!obj_torch.dreamMode and position_meeting(x,y-41,obj_wall)) {
 	obj_torch.dreamMode = !obj_torch.dreamMode;
 }
 
-scr_switch();
+//scr_switch();
