@@ -5,6 +5,7 @@ flash = 0;
 move_speed = 2.8; 
 horspeed = 0;
 verspeed = 0;
+hitting_wall = 0;
 
 hit_cooldown = 0;
 
