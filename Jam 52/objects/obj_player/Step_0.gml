@@ -65,7 +65,7 @@ else {
 	squash_y = 1;
 }
 
-closest = 0;
+closest = -1;
 if obj_torch.dreamMode {
 	with obj_wallDream {
 		if place_meeting(x,y,other) other.closest = id;
@@ -76,7 +76,7 @@ else {
 		if place_meeting(x,y,other) other.closest = id;
 	}
 }
-if place_meeting(x,y,closest) {
+if closest != -1 and place_meeting(x,y,closest) {
 	if !position_meeting(x,y-41,closest) {
 		var close_point = closest_edge(x,y-41,closest);
 		var move_dir = point_direction(close_point[0],close_point[1],x,y-41);
