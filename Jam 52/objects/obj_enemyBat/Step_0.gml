@@ -1,5 +1,7 @@
-x = clamp(x,200,room_width-200);
-y = clamp(y,200,room_height-200);
+if (room == rm_bossBat) {
+	x = clamp(x,100,room_width-100);
+	y = clamp(y,100,room_height-100);
+}
 
 // If bat dies, it falls to ground
 
